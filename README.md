@@ -2,10 +2,10 @@
   <content>
 ## Doblegat Engine
 My repository of my game engine.
+
 ## Credits
 By Julià Mauri Costa
 
 ## License
-
-  <tabTrigger>readme</tabTrigger>
+  </content>
 </snippet>
