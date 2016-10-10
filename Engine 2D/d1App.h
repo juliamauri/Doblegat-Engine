@@ -11,7 +11,7 @@ class d1Window;
 class d1Input;
 class d1Render;
 class d1Textures;
-//class j1Audio;
+class d1Audio;
 class d1FileSystem;
 class d1Scene;
 //class j1Map;
@@ -83,7 +83,7 @@ public:
 	d1Input*			input;
 	d1Render*			render;
 	d1Textures*			tex;
-	//j1Audio*			audio;
+	d1Audio*			audio;
 	d1Scene*			scene;
 	d1FileSystem*		fs;
 	//j1Map*				map;

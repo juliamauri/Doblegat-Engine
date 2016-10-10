@@ -120,6 +120,7 @@
   <ItemGroup>
     <ClCompile Include="c2Log.cpp" />
     <ClCompile Include="d1App.cpp" />
+    <ClCompile Include="d1Audio.cpp" />
     <ClCompile Include="d1FileSystem.cpp" />
     <ClCompile Include="d1Input.cpp" />
     <ClCompile Include="d1Main.cpp" />
@@ -137,6 +138,7 @@
     <ClInclude Include="c2Point.h" />
     <ClInclude Include="c2SString.h" />
     <ClInclude Include="d1App.h" />
+    <ClInclude Include="d1Audio.h" />
     <ClInclude Include="d1FileSystem.h" />
     <ClInclude Include="d1Input.h" />
     <ClInclude Include="d1Module.h" />

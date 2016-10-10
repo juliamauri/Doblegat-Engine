@@ -51,6 +51,9 @@
     <ClCompile Include="d1Textures.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
+    <ClCompile Include="d1Audio.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="d1App.h">
@@ -99,6 +102,9 @@
       <Filter>Modules</Filter>
     </ClInclude>
     <ClInclude Include="d1Textures.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="d1Audio.h">
       <Filter>Modules</Filter>
     </ClInclude>
   </ItemGroup>

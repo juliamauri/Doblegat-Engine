@@ -9,7 +9,7 @@
 #include "d1Input.h"
 #include "d1Render.h"
 #include "d1Textures.h"
-//#include "j1Audio.h"
+#include "d1Audio.h"
 #include "d1Scene.h"
 #include "d1FileSystem.h"
 //#include "j1Map.h"
@@ -26,7 +26,7 @@ d1App::d1App(int argc, char* args[]) : argc(argc), args(args)
 	win = new d1Window();
 	render = new d1Render();
 	tex = new d1Textures();
-	//audio = new j1Audio();
+	audio = new d1Audio();
 	scene = new d1Scene();
 	fs = new d1FileSystem();
 	//map = new j1Map();
@@ -38,10 +38,8 @@ d1App::d1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(input);
 	AddModule(win);
 	AddModule(tex);
-	/*
 	AddModule(audio);
-	AddModule(map);
-	*/
+	//AddModule(map);
 	AddModule(scene);
 
 	// render last to swap buffer
