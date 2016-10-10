@@ -12,7 +12,7 @@
 #include "d1Audio.h"
 #include "d1Scene.h"
 #include "d1FileSystem.h"
-//#include "j1Map.h"
+#include "d1Map.h"
 #include "d1App.h"
 
 // Constructor
@@ -29,7 +29,7 @@ d1App::d1App(int argc, char* args[]) : argc(argc), args(args)
 	audio = new d1Audio();
 	scene = new d1Scene();
 	fs = new d1FileSystem();
-	//map = new j1Map();
+	map = new d1Map();
 	
 
 	// Ordered for awake / Start / Update
@@ -39,7 +39,7 @@ d1App::d1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(win);
 	AddModule(tex);
 	AddModule(audio);
-	//AddModule(map);
+	AddModule(map);
 	AddModule(scene);
 
 	// render last to swap buffer

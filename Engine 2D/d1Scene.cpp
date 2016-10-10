@@ -2,13 +2,11 @@
 #include "c2Log.h"
 #include "d1App.h"
 #include "d1Input.h"
-/*
-#include "j1Textures.h"
-#include "j1Audio.h"
-*/
+#include "d1Textures.h"
+#include "d1Audio.h"
 #include "d1Render.h"
 #include "d1Window.h"
-//#include "j1Map.h"
+#include "d1Map.h"
 #include "d1Scene.h"
 
 
@@ -33,7 +31,7 @@ bool d1Scene::Awake()
 // Called before the first frame
 bool d1Scene::Start()
 {
-	//App->map->Load("iso.tmx");
+	App->map->Load("iso.tmx");
 	
 	return true;
 }
@@ -65,19 +63,17 @@ bool d1Scene::Update(float dt)
 	if(App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 		App->render->camera.x -= 1;
 
-	//App->map->Draw();
+	App->map->Draw();
 	
 	int x, y;
 	App->input->GetMousePosition(x, y);
-	//iPoint map_coordinates = App->map->WorldToMap(x - App->render->camera.x, y - App->render->camera.y);
-	/*
+	iPoint map_coordinates = App->map->WorldToMap(x - App->render->camera.x, y - App->render->camera.y);
 	c2SString title("Map:%dx%d Tiles:%dx%d Tilesets:%d Tile:%d,%d",
 					App->map->data.width, App->map->data.height,
 					App->map->data.tile_width, App->map->data.tile_height,
 					App->map->data.tilesets.count(),
 					map_coordinates.x, map_coordinates.y);
-					*/
-	App->win->SetTitle(/*title.GetString()*/"HELLO");
+	App->win->SetTitle(title.GetString());
 	return true;
 }
 

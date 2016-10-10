@@ -14,7 +14,7 @@ class d1Textures;
 class d1Audio;
 class d1FileSystem;
 class d1Scene;
-//class j1Map;
+class d1Map;
 
 class d1App
 {
@@ -86,7 +86,7 @@ public:
 	d1Audio*			audio;
 	d1Scene*			scene;
 	d1FileSystem*		fs;
-	//j1Map*				map;
+	d1Map*				map;
 
 private:
 

@@ -1,14 +1,15 @@
 <!-- Config file for the game -->
+
 <config>
   <app>
     <title>Doblegat Engine</title>
     <organization>JMC</organization>
   </app>
-  
+	
   <renderer>
     <vsync value="false"/>
   </renderer>
-  
+
   <window>
     <resolution width="1024" height="768" scale="1"/>
     <fullscreen value="false"/>
@@ -16,4 +17,12 @@
     <resizable value="false"/>
     <fullscreen_window value="false"/>
   </window>
+
+  <file_system>
+  </file_system>
+
+  <map>
+    <folder>maps/</folder>
+  </map>
+
 </config>
