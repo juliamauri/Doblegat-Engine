@@ -125,6 +125,7 @@
     <ClCompile Include="d1Main.cpp" />
     <ClCompile Include="d1Render.cpp" />
     <ClCompile Include="d1Scene.cpp" />
+    <ClCompile Include="d1Textures.cpp" />
     <ClCompile Include="d1Window.cpp" />
     <ClCompile Include="PugiXml\src\pugixml.cpp" />
   </ItemGroup>
@@ -141,6 +142,7 @@
     <ClInclude Include="d1Module.h" />
     <ClInclude Include="d1Render.h" />
     <ClInclude Include="d1Scene.h" />
+    <ClInclude Include="d1Textures.h" />
     <ClInclude Include="d1Window.h" />
     <ClInclude Include="PugiXml\src\pugiconfig.hpp" />
     <ClInclude Include="PugiXml\src\pugixml.hpp" />

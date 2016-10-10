@@ -8,10 +8,8 @@
 #include "d1Window.h"
 #include "d1Input.h"
 #include "d1Render.h"
-/*
-#include "j1Textures.h"
-#include "j1Audio.h"
-*/
+#include "d1Textures.h"
+//#include "j1Audio.h"
 #include "d1Scene.h"
 #include "d1FileSystem.h"
 //#include "j1Map.h"
@@ -27,10 +25,8 @@ d1App::d1App(int argc, char* args[]) : argc(argc), args(args)
 	input = new d1Input();
 	win = new d1Window();
 	render = new d1Render();
-	/*
-	tex = new j1Textures();
-	audio = new j1Audio();
-	*/
+	tex = new d1Textures();
+	//audio = new j1Audio();
 	scene = new d1Scene();
 	fs = new d1FileSystem();
 	//map = new j1Map();
@@ -41,8 +37,8 @@ d1App::d1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(fs);
 	AddModule(input);
 	AddModule(win);
-	/*
 	AddModule(tex);
+	/*
 	AddModule(audio);
 	AddModule(map);
 	*/

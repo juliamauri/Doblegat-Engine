@@ -10,10 +10,8 @@
 class d1Window;
 class d1Input;
 class d1Render;
-/*
-class j1Textures;
-class j1Audio;
-*/
+class d1Textures;
+//class j1Audio;
 class d1FileSystem;
 class d1Scene;
 //class j1Map;
@@ -84,10 +82,8 @@ public:
 	d1Window*			win;
 	d1Input*			input;
 	d1Render*			render;
-	/*
-	j1Textures*			tex;
-	j1Audio*			audio;
-	*/
+	d1Textures*			tex;
+	//j1Audio*			audio;
 	d1Scene*			scene;
 	d1FileSystem*		fs;
 	//j1Map*				map;
