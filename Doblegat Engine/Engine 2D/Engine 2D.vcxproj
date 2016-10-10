@@ -22,7 +22,7 @@
     <ProjectGuid>{AB1FD11D-11BF-4D50-B964-BED72DE85CA2}</ProjectGuid>
     <RootNamespace>Engine2D</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
-    <ProjectName>Engine2D</ProjectName>
+    <ProjectName>Engine 2D</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -94,7 +94,9 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <SDLCheck>true</SDLCheck>
+      <SDLCheck>
+      </SDLCheck>
+      <PreprocessorDefinitions>_ITERATOR_DEBUG_LEVEL=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -116,6 +118,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="c2Log.cpp" />
+    <ClCompile Include="d1App.cpp" />
+    <ClCompile Include="d1Main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="c2Defs.h" />
+    <ClInclude Include="c2DynArray.h" />
+    <ClInclude Include="c2List.h" />
+    <ClInclude Include="c2Log.h" />
+    <ClInclude Include="c2Point.h" />
+    <ClInclude Include="c2SString.h" />
+    <ClInclude Include="d1App.h" />
+    <ClInclude Include="d1Module.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

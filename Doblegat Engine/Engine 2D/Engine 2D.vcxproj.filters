@@ -1,3 +1,51 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Containers">
+      <UniqueIdentifier>{bee49c3c-1cb7-4d92-9e24-f548157cae3d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules">
+      <UniqueIdentifier>{bc1af8ee-92b3-464b-8f92-46f4c59d6f99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Main">
+      <UniqueIdentifier>{78bfdc7d-a2b6-4026-b6a8-121f60b0c53f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="d1App.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="d1Main.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="c2Log.cpp">
+      <Filter>Containers</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="d1App.h">
+      <Filter>Main</Filter>
+    </ClInclude>
+    <ClInclude Include="d1Module.h">
+      <Filter>Main</Filter>
+    </ClInclude>
+    <ClInclude Include="c2Defs.h">
+      <Filter>Containers</Filter>
+    </ClInclude>
+    <ClInclude Include="c2DynArray.h">
+      <Filter>Containers</Filter>
+    </ClInclude>
+    <ClInclude Include="c2List.h">
+      <Filter>Containers</Filter>
+    </ClInclude>
+    <ClInclude Include="c2Log.h">
+      <Filter>Containers</Filter>
+    </ClInclude>
+    <ClInclude Include="c2Point.h">
+      <Filter>Containers</Filter>
+    </ClInclude>
+    <ClInclude Include="c2SString.h">
+      <Filter>Containers</Filter>
+    </ClInclude>
+  </ItemGroup>
 </Project>
