@@ -1,23 +1,22 @@
-#ifndef __j1APP_H__
-#define __j1APP_H__
+#ifndef __d1APP_H__
+#define __d1APP_H__
 
 #include "c2List.h"
 #include "d1Module.h"
 #include "PugiXml\src\pugixml.hpp"
 
 // Modules
+
+class d1Window;
+class d1Input;
+class d1Render;
 /*
-class j1Window;
-class j1Input;
-class j1Render;
 class j1Textures;
 class j1Audio;
 */
 class d1FileSystem;
-/*
-class j1Scene;
-class j1Map;
-*/
+class d1Scene;
+//class j1Map;
 
 class d1App
 {
@@ -81,18 +80,17 @@ private:
 public:
 
 	// Modules
+	
+	d1Window*			win;
+	d1Input*			input;
+	d1Render*			render;
 	/*
-	j1Window*			win;
-	j1Input*			input;
-	j1Render*			render;
 	j1Textures*			tex;
 	j1Audio*			audio;
-	j1Scene*			scene;
 	*/
+	d1Scene*			scene;
 	d1FileSystem*		fs;
-	/*
-	j1Map*				map;
-	*/
+	//j1Map*				map;
 
 private:
 

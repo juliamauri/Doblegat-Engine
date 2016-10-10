@@ -4,18 +4,17 @@
 #include "c2Defs.h"
 #include "c2Log.h"
 
+
+#include "d1Window.h"
+#include "d1Input.h"
+#include "d1Render.h"
 /*
-#include "j1Window.h"
-#include "j1Input.h"
-#include "j1Render.h"
 #include "j1Textures.h"
 #include "j1Audio.h"
-#include "j1Scene.h"
 */
+#include "d1Scene.h"
 #include "d1FileSystem.h"
-/*
-#include "j1Map.h"
-*/
+//#include "j1Map.h"
 #include "d1App.h"
 
 // Constructor
@@ -24,14 +23,15 @@ d1App::d1App(int argc, char* args[]) : argc(argc), args(args)
 	frames = 0;
 	want_to_save = want_to_load = false;
 	
+	
+	input = new d1Input();
+	win = new d1Window();
+	render = new d1Render();
 	/*
-	input = new j1Input();
-	win = new j1Window();
-	render = new j1Render();
 	tex = new j1Textures();
 	audio = new j1Audio();
-	scene = new j1Scene();
 	*/
+	scene = new d1Scene();
 	fs = new d1FileSystem();
 	//map = new j1Map();
 	
@@ -39,17 +39,18 @@ d1App::d1App(int argc, char* args[]) : argc(argc), args(args)
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
 	AddModule(fs);
-	/*
 	AddModule(input);
 	AddModule(win);
+	/*
 	AddModule(tex);
 	AddModule(audio);
 	AddModule(map);
+	*/
 	AddModule(scene);
 
 	// render last to swap buffer
 	AddModule(render);
-	*/
+	
 }
 
 // Destructor
@@ -129,10 +130,8 @@ bool d1App::Update()
 	bool ret = true;
 	PrepareUpdate();
 
-	/*
 	if(input->GetWindowEvent(WE_QUIT) == true)
 		ret = false;
-		*/
 
 	if(ret == true)
 		ret = PreUpdate();

@@ -16,6 +16,9 @@
     <Filter Include="Tools\PuguiXML">
       <UniqueIdentifier>{0b23c068-3614-4092-a059-be3053388379}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{b4e4a4f0-ca07-4261-a283-3ed48f7e46fd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="d1App.cpp">
@@ -31,6 +34,18 @@
       <Filter>Tools\PuguiXML</Filter>
     </ClCompile>
     <ClCompile Include="d1FileSystem.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="d1Input.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="d1Window.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="d1Scene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="d1Render.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
   </ItemGroup>
@@ -66,6 +81,18 @@
       <Filter>Tools\PuguiXML</Filter>
     </ClInclude>
     <ClInclude Include="d1FileSystem.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="d1Input.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="d1Window.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="d1Scene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="d1Render.h">
       <Filter>Modules</Filter>
     </ClInclude>
   </ItemGroup>

@@ -121,7 +121,11 @@
     <ClCompile Include="c2Log.cpp" />
     <ClCompile Include="d1App.cpp" />
     <ClCompile Include="d1FileSystem.cpp" />
+    <ClCompile Include="d1Input.cpp" />
     <ClCompile Include="d1Main.cpp" />
+    <ClCompile Include="d1Render.cpp" />
+    <ClCompile Include="d1Scene.cpp" />
+    <ClCompile Include="d1Window.cpp" />
     <ClCompile Include="PugiXml\src\pugixml.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -133,7 +137,11 @@
     <ClInclude Include="c2SString.h" />
     <ClInclude Include="d1App.h" />
     <ClInclude Include="d1FileSystem.h" />
+    <ClInclude Include="d1Input.h" />
     <ClInclude Include="d1Module.h" />
+    <ClInclude Include="d1Render.h" />
+    <ClInclude Include="d1Scene.h" />
+    <ClInclude Include="d1Window.h" />
     <ClInclude Include="PugiXml\src\pugiconfig.hpp" />
     <ClInclude Include="PugiXml\src\pugixml.hpp" />
   </ItemGroup>
