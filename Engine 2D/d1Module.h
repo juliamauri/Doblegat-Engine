@@ -7,15 +7,15 @@
 #define __d1MODULE_H__
 
 #include "c2SString.h"
-//#include "PugiXml\src\pugixml.hpp"
+#include "PugiXml\src\pugixml.hpp"
 
-class j1App;
+class d1App;
 
-class j1Module
+class d1Module
 {
 public:
 
-	j1Module() : active(false)
+	d1Module() : active(false)
 	{}
 
 	void Init()
@@ -24,12 +24,10 @@ public:
 	}
 
 	// Called before render is available
-	/*
 	virtual bool Awake(pugi::xml_node&)
 	{
 		return true;
 	}
-	*/
 
 	// Called before the first frame
 	virtual bool Start()
@@ -61,7 +59,6 @@ public:
 		return true;
 	}
 
-	/*
 	virtual bool Load(pugi::xml_node&)
 	{
 		return true;
@@ -71,11 +68,10 @@ public:
 	{
 		return true;
 	}
-	*/
 
 public:
 
-	p2SString	name;
+	c2SString	name;
 	bool		active;
 
 };

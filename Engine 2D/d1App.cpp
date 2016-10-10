@@ -11,13 +11,15 @@
 #include "j1Textures.h"
 #include "j1Audio.h"
 #include "j1Scene.h"
-#include "j1FileSystem.h"
+*/
+#include "d1FileSystem.h"
+/*
 #include "j1Map.h"
 */
 #include "d1App.h"
 
 // Constructor
-j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
+d1App::d1App(int argc, char* args[]) : argc(argc), args(args)
 {
 	frames = 0;
 	want_to_save = want_to_load = false;
@@ -29,13 +31,15 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	tex = new j1Textures();
 	audio = new j1Audio();
 	scene = new j1Scene();
-	fs = new j1FileSystem();
-	map = new j1Map();
+	*/
+	fs = new d1FileSystem();
+	//map = new j1Map();
 	
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
 	AddModule(fs);
+	/*
 	AddModule(input);
 	AddModule(win);
 	AddModule(tex);
@@ -49,10 +53,10 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 }
 
 // Destructor
-j1App::~j1App()
+d1App::~d1App()
 {
 	// release modules
-	p2List_item<j1Module*>* item = modules.end;
+	c2List_item<d1Module*>* item = modules.end;
 
 	while(item != NULL)
 	{
@@ -63,24 +67,21 @@ j1App::~j1App()
 	modules.clear();
 }
 
-void j1App::AddModule(j1Module* module)
+void d1App::AddModule(d1Module* module)
 {
 	module->Init();
 	modules.add(module);
 }
 
 // Called before render is available
-bool j1App::Awake()
+bool d1App::Awake()
 {
-	/*
 	pugi::xml_document	config_file;
 	pugi::xml_node		config;
 	pugi::xml_node		app_config;
-	*/
 
 	bool ret = true;
 
-	/*
 	config = LoadConfig(config_file);
 
 	if(config.empty() == false)
@@ -94,7 +95,7 @@ bool j1App::Awake()
 
 	if(ret == true)
 	{
-		p2List_item<j1Module*>* item;
+		c2List_item<d1Module*>* item;
 		item = modules.start;
 
 		while(item != NULL && ret == true)
@@ -103,15 +104,14 @@ bool j1App::Awake()
 			item = item->next;
 		}
 	}
-	*/
 	return ret;
 }
 
 // Called before the first frame
-bool j1App::Start()
+bool d1App::Start()
 {
 	bool ret = true;
-	p2List_item<j1Module*>* item;
+	c2List_item<d1Module*>* item;
 	item = modules.start;
 
 	while(item != NULL && ret == true)
@@ -124,7 +124,7 @@ bool j1App::Start()
 }
 
 // Called each loop iteration
-bool j1App::Update()
+bool d1App::Update()
 {
 	bool ret = true;
 	PrepareUpdate();
@@ -148,8 +148,7 @@ bool j1App::Update()
 }
 
 // ---------------------------------------------
-/*
-pugi::xml_node j1App::LoadConfig(pugi::xml_document& config_file) const
+pugi::xml_node d1App::LoadConfig(pugi::xml_document& config_file) const
 {
 	pugi::xml_node ret;
 
@@ -165,32 +164,29 @@ pugi::xml_node j1App::LoadConfig(pugi::xml_document& config_file) const
 
 	return ret;
 }
-*/
 
 // ---------------------------------------------
-void j1App::PrepareUpdate()
+void d1App::PrepareUpdate()
 {
 }
 
 // ---------------------------------------------
-void j1App::FinishUpdate()
+void d1App::FinishUpdate()
 {
-/*
 	if(want_to_save == true)
 		SavegameNow();
 
 	if(want_to_load == true)
 		LoadGameNow();
-		*/
 }
 
 // Call modules before each loop iteration
-bool j1App::PreUpdate()
+bool d1App::PreUpdate()
 {
 	bool ret = true;
-	p2List_item<j1Module*>* item;
+	c2List_item<d1Module*>* item;
 	item = modules.start;
-	j1Module* pModule = NULL;
+	d1Module* pModule = NULL;
 
 	for(item = modules.start; item != NULL && ret == true; item = item->next)
 	{
@@ -207,12 +203,12 @@ bool j1App::PreUpdate()
 }
 
 // Call modules on each loop iteration
-bool j1App::DoUpdate()
+bool d1App::DoUpdate()
 {
 	bool ret = true;
-	p2List_item<j1Module*>* item;
+	c2List_item<d1Module*>* item;
 	item = modules.start;
-	j1Module* pModule = NULL;
+	d1Module* pModule = NULL;
 
 	for(item = modules.start; item != NULL && ret == true; item = item->next)
 	{
@@ -229,11 +225,11 @@ bool j1App::DoUpdate()
 }
 
 // Call modules after each loop iteration
-bool j1App::PostUpdate()
+bool d1App::PostUpdate()
 {
 	bool ret = true;
-	p2List_item<j1Module*>* item;
-	j1Module* pModule = NULL;
+	c2List_item<d1Module*>* item;
+	d1Module* pModule = NULL;
 
 	for(item = modules.start; item != NULL && ret == true; item = item->next)
 	{
@@ -250,10 +246,10 @@ bool j1App::PostUpdate()
 }
 
 // Called before quitting
-bool j1App::CleanUp()
+bool d1App::CleanUp()
 {
 	bool ret = true;
-	p2List_item<j1Module*>* item;
+	c2List_item<d1Module*>* item;
 	item = modules.end;
 
 	while(item != NULL && ret == true)
@@ -266,13 +262,13 @@ bool j1App::CleanUp()
 }
 
 // ---------------------------------------
-int j1App::GetArgc() const
+int d1App::GetArgc() const
 {
 	return argc;
 }
 
 // ---------------------------------------
-const char* j1App::GetArgv(int index) const
+const char* d1App::GetArgv(int index) const
 {
 	if(index < argc)
 		return args[index];
@@ -281,21 +277,19 @@ const char* j1App::GetArgv(int index) const
 }
 
 // ---------------------------------------
-const char* j1App::GetTitle() const
+const char* d1App::GetTitle() const
 {
 	return title.GetString();
 }
 
 // ---------------------------------------
-const char* j1App::GetOrganization() const
+const char* d1App::GetOrganization() const
 {
 	return organization.GetString();
 }
 
 // Load / Save
-
-/*
-void j1App::LoadGame(const char* file)
+void d1App::LoadGame(const char* file)
 {
 	// we should be checking if that file actually exist
 	// from the "GetSaveGames" list
@@ -304,7 +298,7 @@ void j1App::LoadGame(const char* file)
 }
 
 // ---------------------------------------
-void j1App::SaveGame(const char* file) const
+void d1App::SaveGame(const char* file) const
 {
 	// we should be checking if that file actually exist
 	// from the "GetSaveGames" list ... should we overwrite ?
@@ -314,12 +308,12 @@ void j1App::SaveGame(const char* file) const
 }
 
 // ---------------------------------------
-void j1App::GetSaveGames(p2List<p2SString>& list_to_fill) const
+void d1App::GetSaveGames(c2List<c2SString>& list_to_fill) const
 {
 	// need to add functionality to file_system module for this to work
 }
 
-bool j1App::LoadGameNow()
+bool d1App::LoadGameNow()
 {
 	bool ret = false;
 
@@ -340,7 +334,7 @@ bool j1App::LoadGameNow()
 
 			root = data.child("game_state");
 
-			p2List_item<j1Module*>* item = modules.start;
+			c2List_item<d1Module*>* item = modules.start;
 			ret = true;
 
 			while(item != NULL && ret == true)
@@ -365,7 +359,7 @@ bool j1App::LoadGameNow()
 	return ret;
 }
 
-bool j1App::SavegameNow() const
+bool d1App::SavegameNow() const
 {
 	bool ret = true;
 
@@ -377,7 +371,7 @@ bool j1App::SavegameNow() const
 	
 	root = data.append_child("game_state");
 
-	p2List_item<j1Module*>* item = modules.start;
+	c2List_item<d1Module*>* item = modules.start;
 
 	while(item != NULL && ret == true)
 	{
@@ -401,4 +395,3 @@ bool j1App::SavegameNow() const
 	want_to_save = false;
 	return ret;
 }
-*/

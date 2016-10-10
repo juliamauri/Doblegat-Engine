@@ -1,5 +1,5 @@
-#ifndef __p2List_H__
-#define __p2List_H__
+#ifndef __c2List_H__
+#define __c2List_H__
 
 #include "c2Defs.h"
 
@@ -7,19 +7,19 @@
 * Contains items from double linked list
 */
 template<class tdata>
-struct p2List_item
+struct c2List_item
 {
 	tdata                 data;
-	p2List_item<tdata>*   next;
-	p2List_item<tdata>*   prev;
+	c2List_item<tdata>*   next;
+	c2List_item<tdata>*   prev;
 
-	inline p2List_item(const tdata& _data)
+	inline c2List_item(const tdata& _data)
 	{
 		data = _data;
 		next = prev = NULL;
 	}
 
-	~p2List_item()
+	~c2List_item()
 	{}
 };
 
@@ -27,13 +27,13 @@ struct p2List_item
 * Manages a double linked list
 */
 template<class tdata>
-class p2List
+class c2List
 {
 
 public:
 
-	p2List_item<tdata>*   start;
-	p2List_item<tdata>*   end;
+	c2List_item<tdata>*   start;
+	c2List_item<tdata>*   end;
 
 private:
 
@@ -44,7 +44,7 @@ public:
 	/**
 	* Constructor
 	*/
-	inline p2List()
+	inline c2List()
 	{
 		start = end = NULL;
 		size = 0;
@@ -53,7 +53,7 @@ public:
 	/**
 	* Destructor
 	*/
-	~p2List()
+	~c2List()
 	{
 		clear();
 	}
@@ -69,10 +69,10 @@ public:
 	/**
 	* Add new item
 	*/
-	p2List_item<tdata>* add(const tdata& item)
+	c2List_item<tdata>* add(const tdata& item)
 	{
-		p2List_item<tdata>*   p_data_item;
-		p_data_item = new p2List_item < tdata >(item);
+		c2List_item<tdata>*   p_data_item;
+		p_data_item = new c2List_item < tdata >(item);
 
 		if(start == NULL)
 		{
@@ -92,7 +92,7 @@ public:
 	/**
 	* Deletes an item from the list
 	*/
-	bool del(p2List_item<tdata>* item)
+	bool del(c2List_item<tdata>* item)
 	{
 		if(item == NULL)
 		{
@@ -136,8 +136,8 @@ public:
 	*/
 	void clear()
 	{
-		p2List_item<tdata>*   p_data;
-		p2List_item<tdata>*   p_next;
+		c2List_item<tdata>*   p_data;
+		c2List_item<tdata>*   p_next;
 		p_data = start;
 
 		while(p_data != NULL)
@@ -157,7 +157,7 @@ public:
 	tdata& operator  [](const unsigned int index)
 	{
 		long                  pos;
-		p2List_item<tdata>*   p_item;
+		c2List_item<tdata>*   p_item;
 		pos = 0;
 		p_item = start;
 
@@ -181,7 +181,7 @@ public:
 	const tdata& operator  [](const unsigned int index) const
 	{
 		long                  pos;
-		p2List_item<tdata>*   p_item;
+		c2List_item<tdata>*   p_item;
 		pos = 0;
 		p_item = start;
 
@@ -204,9 +204,9 @@ public:
 	/**
 	* const read operator access directly to a position in the list
 	*/
-	const p2List<tdata>& operator +=(const p2List<tdata>& other_list)
+	const c2List<tdata>& operator +=(const c2List<tdata>& other_list)
 	{
-		p2List_item<tdata>*   p_item = other_list.start;
+		c2List_item<tdata>*   p_item = other_list.start;
 
 		while(p_item != NULL)
 		{
@@ -220,10 +220,10 @@ public:
 	/**
 	* const access to a node in a position in the list
 	*/
-	const p2List_item<tdata>* At(unsigned int index) const
+	const c2List_item<tdata>* At(unsigned int index) const
 	{
 		long                  pos = 0;
-		p2List_item<tdata>*   p_item = start;
+		c2List_item<tdata>*   p_item = start;
 
 		while(p_item != NULL)
 		{
@@ -239,10 +239,10 @@ public:
 	/**
 	* access to a node in a position in the list
 	*/
-	p2List_item<tdata>* At(unsigned int index)
+	c2List_item<tdata>* At(unsigned int index)
 	{
 		long                  pos = 0;
-		p2List_item<tdata>*   p_item = start;
+		c2List_item<tdata>*   p_item = start;
 
 		while(p_item != NULL)
 		{
@@ -264,7 +264,7 @@ public:
 		while(swapped)
 		{
 			swapped = false;
-			p2List_item<tdata>* tmp = start;
+			c2List_item<tdata>* tmp = start;
 
 			while(tmp != NULL && tmp->next != NULL)
 			{
@@ -287,7 +287,7 @@ public:
 	*/
 	int find(const tdata& data)
 	{
-		p2List_item<tdata>* tmp = start;
+		c2List_item<tdata>* tmp = start;
 		int index = 0;
 
 		while(tmp != NULL)
@@ -301,14 +301,14 @@ public:
 		return (-1);
 	}
 
-	void InsertAfter(uint position, const p2List<tdata>& list)
+	void InsertAfter(uint position, const c2List<tdata>& list)
 	{
-		p2List_item<tdata>* p_my_list = At(position);
-		p2List_item<tdata>* p_other_list = list.start;
+		c2List_item<tdata>* p_my_list = At(position);
+		c2List_item<tdata>* p_other_list = list.start;
 
 		while(p_other_list != NULL)
 		{
-			p2List_item<tdata>* p_new_item = new p2List_item<tdata>(p_other_list->data);
+			c2List_item<tdata>* p_new_item = new c2List_item<tdata>(p_other_list->data);
 
 			p_new_item->next = (p_my_list) ? p_my_list->next : NULL;
 
@@ -329,4 +329,4 @@ public:
 		}
 	}
 };
-#endif /*__p2List_H__*/
+#endif /*__c2List_H__*/

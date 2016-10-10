@@ -3,7 +3,7 @@
 
 #include "c2List.h"
 #include "d1Module.h"
-//#include "PugiXml\src\pugixml.hpp"
+#include "PugiXml\src\pugixml.hpp"
 
 // Modules
 /*
@@ -12,20 +12,22 @@ class j1Input;
 class j1Render;
 class j1Textures;
 class j1Audio;
-class j1FileSystem;
+*/
+class d1FileSystem;
+/*
 class j1Scene;
 class j1Map;
 */
 
-class j1App
+class d1App
 {
 public:
 
 	// Constructor
-	j1App(int argc, char* args[]);
+	d1App(int argc, char* args[]);
 
 	// Destructor
-	virtual ~j1App();
+	virtual ~d1App();
 
 	// Called before render is available
 	bool Awake();
@@ -40,7 +42,7 @@ public:
 	bool CleanUp();
 
 	// Add a new module to handle
-	void AddModule(j1Module* module);
+	void AddModule(d1Module* module);
 
 	// Exposing some properties for reading
 	int GetArgc() const;
@@ -48,16 +50,14 @@ public:
 	const char* GetTitle() const;
 	const char* GetOrganization() const;
 
-	/*
 	void LoadGame(const char* file);
 	void SaveGame(const char* file) const;
-	void GetSaveGames(p2List<p2SString>& list_to_fill) const;
-	*/
+	void GetSaveGames(c2List<c2SString>& list_to_fill) const;
 
 private:
 
 	// Load config file
-	//pugi::xml_node LoadConfig(pugi::xml_document&) const;
+	pugi::xml_node LoadConfig(pugi::xml_document&) const;
 
 	// Call modules before each loop iteration
 	void PrepareUpdate();
@@ -75,10 +75,8 @@ private:
 	bool PostUpdate();
 
 	// Load / Save
-	/*
 	bool LoadGameNow();
 	bool SavegameNow() const;
-	*/
 
 public:
 
@@ -90,27 +88,29 @@ public:
 	j1Textures*			tex;
 	j1Audio*			audio;
 	j1Scene*			scene;
-	j1FileSystem*		fs;
+	*/
+	d1FileSystem*		fs;
+	/*
 	j1Map*				map;
 	*/
 
 private:
 
-	p2List<j1Module*>	modules;
+	c2List<d1Module*>	modules;
 	uint				frames;
 	float				dt;
 	int					argc;
 	char**				args;
 
-	p2SString			title;
-	p2SString			organization;
+	c2SString			title;
+	c2SString			organization;
 
 	mutable bool		want_to_save;
 	bool				want_to_load;
-	p2SString			load_game;
-	mutable p2SString	save_game;
+	c2SString			load_game;
+	mutable c2SString	save_game;
 };
 
-extern j1App* App; // No student is asking me about that ... odd :-S
+extern d1App* App; // No student is asking me about that ... odd :-S
 
 #endif

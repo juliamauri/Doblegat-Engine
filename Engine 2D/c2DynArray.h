@@ -2,15 +2,15 @@
 // Array that resizes dynamically   -------------------
 // ----------------------------------------------------
 
-#ifndef __P2DYNARRAY_H__
-#define __P2DYNARRAY_H__
+#ifndef __C2DYNARRAY_H__
+#define __C2DYNARRAY_H__
 
 #include "c2Defs.h"
 
 #define DYN_ARRAY_BLOCK_SIZE 16
 
 template<class VALUE>
-class p2DynArray
+class c2DynArray
 {
 private:
 
@@ -21,18 +21,18 @@ private:
 public:
 
 	// Constructors
-	p2DynArray() : mem_capacity(0), num_elements(0), data(NULL)
+	c2DynArray() : mem_capacity(0), num_elements(0), data(NULL)
 	{
 		Alloc(DYN_ARRAY_BLOCK_SIZE);
 	}
 
-	p2DynArray(unsigned int capacity) : mem_capacity(0), num_elements(0), data(NULL)
+	c2DynArray(unsigned int capacity) : mem_capacity(0), num_elements(0), data(NULL)
 	{
 		Alloc(capacity);
 	}
 
 	// Destructor
-	~p2DynArray()
+	~c2DynArray()
 	{
 		delete[] data;
 	}
@@ -50,7 +50,7 @@ public:
 		return data[index];
 	}
 
-	const p2DynArray<VALUE>& operator+= (const p2DynArray<VALUE>& array)
+	const c2DynArray<VALUE>& operator+= (const c2DynArray<VALUE>& array)
 	{
 		if(num_elements + array.num_elements > mem_capacity)
 			Alloc(num_elements + array.num_elements);
@@ -112,7 +112,7 @@ public:
 		return true;
 	}
 
-	bool Insert(const p2DynArray<VALUE>& array, unsigned int position)
+	bool Insert(const c2DynArray<VALUE>& array, unsigned int position)
 	{
 		if(position > num_elements)
 			return false;
@@ -266,4 +266,4 @@ private:
 	}
 };
 
-#endif // __P2DYNARRAY_H__
+#endif // __C2DYNARRAY_H__

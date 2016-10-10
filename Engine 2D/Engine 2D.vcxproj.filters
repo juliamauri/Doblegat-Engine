@@ -10,6 +10,12 @@
     <Filter Include="Main">
       <UniqueIdentifier>{78bfdc7d-a2b6-4026-b6a8-121f60b0c53f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Tools">
+      <UniqueIdentifier>{b9dcbfdd-6798-4c27-bdb0-f0dc2851e95a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tools\PuguiXML">
+      <UniqueIdentifier>{0b23c068-3614-4092-a059-be3053388379}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="d1App.cpp">
@@ -20,6 +26,12 @@
     </ClCompile>
     <ClCompile Include="c2Log.cpp">
       <Filter>Containers</Filter>
+    </ClCompile>
+    <ClCompile Include="PugiXml\src\pugixml.cpp">
+      <Filter>Tools\PuguiXML</Filter>
+    </ClCompile>
+    <ClCompile Include="d1FileSystem.cpp">
+      <Filter>Modules</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -46,6 +58,15 @@
     </ClInclude>
     <ClInclude Include="c2SString.h">
       <Filter>Containers</Filter>
+    </ClInclude>
+    <ClInclude Include="PugiXml\src\pugiconfig.hpp">
+      <Filter>Tools\PuguiXML</Filter>
+    </ClInclude>
+    <ClInclude Include="PugiXml\src\pugixml.hpp">
+      <Filter>Tools\PuguiXML</Filter>
+    </ClInclude>
+    <ClInclude Include="d1FileSystem.h">
+      <Filter>Modules</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

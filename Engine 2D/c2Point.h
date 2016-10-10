@@ -2,35 +2,35 @@
 // Point class    -----------
 // ----------------------------------------------------
 
-#ifndef __P2POINT_H__
-#define __P2POINT_H__
+#ifndef __C2POINT_H__
+#define __C2POINT_H__
 
 #include "c2Defs.h"
 #include <math.h>
 
 template<class TYPE>
-class p2Point
+class c2Point
 {
 public:
 
 	TYPE x, y;
 
-	p2Point()
+	c2Point()
 	{}
 
-	p2Point(const p2Point<TYPE>& v)
+	c2Point(const c2Point<TYPE>& v)
 	{
 		this->x = v.x;
 		this->y = v.y;
 	}
 
-	p2Point(const TYPE& x, const TYPE& y)
+	c2Point(const TYPE& x, const TYPE& y)
 	{
 		this->x = x;
 		this->y = y;
 	}
 
-	p2Point& create(const TYPE& x, const TYPE& y)
+	c2Point& create(const TYPE& x, const TYPE& y)
 	{
 		this->x = x;
 		this->y = y;
@@ -39,9 +39,9 @@ public:
 	}
 
 	// Math ------------------------------------------------
-	p2Point operator -(const p2Point &v) const
+	c2Point operator -(const c2Point &v) const
 	{
-		p2Vector2 r;
+		c2Vector2 r;
 
 		r.x = x - v.x;
 		r.y = y - v.y;
@@ -49,9 +49,9 @@ public:
 		return(r);
 	}
 
-	p2Point operator + (const p2Point &v) const
+	c2Point operator + (const c2Point &v) const
 	{
-		p2Vector2 r;
+		c2Vector2 r;
 
 		r.x = x + v.x;
 		r.y = y + v.y;
@@ -59,7 +59,7 @@ public:
 		return(r);
 	}
 
-	const p2Point& operator -=(const p2Point &v)
+	const c2Point& operator -=(const c2Point &v)
 	{
 		x -= v.x;
 		y -= v.y;
@@ -67,7 +67,7 @@ public:
 		return(*this);
 	}
 
-	const p2Point& operator +=(const p2Point &v)
+	const c2Point& operator +=(const c2Point &v)
 	{
 		x += v.x;
 		y += v.y;
@@ -75,12 +75,12 @@ public:
 		return(*this);
 	}
 
-	bool operator ==(const p2Point& v) const
+	bool operator ==(const c2Point& v) const
 	{
 		return (x == v.x && y == v.y);
 	}
 
-	bool operator !=(const p2Point& v) const
+	bool operator !=(const c2Point& v) const
 	{
 		return (x != v.x || y != v.y);
 	}
@@ -91,13 +91,13 @@ public:
 		return (x == 0 && y == 0);
 	}
 
-	p2Point& SetToZero()
+	c2Point& SetToZero()
 	{
 		x = y = 0;
 		return(*this);
 	}
 
-	p2Point& Negate()
+	c2Point& Negate()
 	{
 		x = -x;
 		y = -y;
@@ -106,7 +106,7 @@ public:
 	}
 
 	// Distances ---------------------------------------------
-	TYPE DistanceTo(const p2Point& v) const
+	TYPE DistanceTo(const c2Point& v) const
 	{
 		TYPE fx = x - v.x;
 		TYPE fy = y - v.y;
@@ -114,7 +114,7 @@ public:
 		return sqrtf((fx*fx) + (fy*fy));
 	}
 
-	TYPE DistanceNoSqrt(const p2Point& v) const
+	TYPE DistanceNoSqrt(const c2Point& v) const
 	{
 		TYPE fx = x - v.x;
 		TYPE fy = y - v.y;
@@ -122,13 +122,13 @@ public:
 		return (fx*fx) + (fy*fy);
 	}
 
-	TYPE DistanceManhattan(const p2Point& v) const
+	TYPE DistanceManhattan(const c2Point& v) const
 	{
 		return abs(v.x - x) + abs(v.y - y);
 	}
 };
 
-typedef p2Point<int> iPoint;
-typedef p2Point<float> fPoint;
+typedef c2Point<int> iPoint;
+typedef c2Point<float> fPoint;
 
-#endif // __P2POINT_H__
+#endif // __C2POINT_H__

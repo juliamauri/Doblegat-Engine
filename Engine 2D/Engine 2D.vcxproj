@@ -120,7 +120,9 @@
   <ItemGroup>
     <ClCompile Include="c2Log.cpp" />
     <ClCompile Include="d1App.cpp" />
+    <ClCompile Include="d1FileSystem.cpp" />
     <ClCompile Include="d1Main.cpp" />
+    <ClCompile Include="PugiXml\src\pugixml.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="c2Defs.h" />
@@ -130,7 +132,10 @@
     <ClInclude Include="c2Point.h" />
     <ClInclude Include="c2SString.h" />
     <ClInclude Include="d1App.h" />
+    <ClInclude Include="d1FileSystem.h" />
     <ClInclude Include="d1Module.h" />
+    <ClInclude Include="PugiXml\src\pugiconfig.hpp" />
+    <ClInclude Include="PugiXml\src\pugixml.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

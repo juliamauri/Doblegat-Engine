@@ -1,5 +1,5 @@
-#ifndef __p2SString_H__
-#define __p2SString_H__
+#ifndef __c2SString_H__
+#define __c2SString_H__
 
 #include <stdlib.h>
 #include <stdarg.h>
@@ -9,7 +9,7 @@
 
 #define TMP_STRING_SIZE	4096
 
-class p2SString
+class c2SString
 {
 private:
 
@@ -19,13 +19,13 @@ private:
 public:
 
 	// Constructors
-	p2SString()
+	c2SString()
 	{
 		Alloc(1);
 		Clear();
 	}
 
-	p2SString(unsigned int size)
+	c2SString(unsigned int size)
 	{
 		if(size > 0)
 			Alloc(size);
@@ -35,13 +35,13 @@ public:
 		Clear();
 	}
 
-	p2SString(const p2SString& string)
+	c2SString(const c2SString& string)
 	{
 		Alloc(string.size);
 		strcpy_s(str, size, string.str);
 	}
 
-	p2SString(const char *format, ...)
+	c2SString(const char *format, ...)
 	{
 		size = 0;
 
@@ -70,13 +70,13 @@ public:
 	}
 	
 	// Destructor
-	virtual ~p2SString()
+	virtual ~c2SString()
 	{
 		if(str != NULL)
 			delete[] str;
 	}
 
-	const p2SString& create(const char *format, ...)
+	const c2SString& create(const char *format, ...)
 	{
 		size = 0;
 
@@ -107,7 +107,7 @@ public:
 	}
 
 	// Operators
-	bool operator== (const p2SString& string) const
+	bool operator== (const c2SString& string) const
 	{
 		return strcmp(string.str, str) == 0;
 	}
@@ -119,7 +119,7 @@ public:
 		return false;
 	}
 
-	bool operator!= (const p2SString& string) const
+	bool operator!= (const c2SString& string) const
 	{
 		return strcmp(string.str, str) != 0;
 	}
@@ -131,7 +131,7 @@ public:
 		return true;
 	}
 	
-	const p2SString& operator= (const p2SString& string)
+	const c2SString& operator= (const c2SString& string)
 	{
 		if(string.Length() + 1 > size)
 		{
@@ -146,9 +146,9 @@ public:
 		return(*this);
 	}
 
-	const p2SString& operator= (const char* string)
+	const c2SString& operator= (const char* string)
 	{
-		p2SString t(string);
+		c2SString t(string);
 		(*this) = t;
 		return *this;
 
@@ -172,7 +172,7 @@ public:
 		return(*this);
 	}
 	
-	const p2SString& operator+= (const p2SString& string)
+	const c2SString& operator+= (const c2SString& string)
 	{
 		unsigned int need_size = string.Length() + Length() + 1;
 
@@ -189,7 +189,7 @@ public:
 		return(*this);
 	}
 
-	const p2SString& operator+= (const char* string)
+	const c2SString& operator+= (const char* string)
 	{
 		if(string != NULL)
 		{
@@ -333,7 +333,7 @@ public:
 	/**
 	* Paste a substring into buffer
 	*/
-	uint SubString(unsigned int start, unsigned int end, p2SString& buffer) const
+	uint SubString(unsigned int start, unsigned int end, c2SString& buffer) const
 	{
 		if(str != NULL)
 		{
@@ -365,4 +365,4 @@ private:
 
 };
 
-#endif // __p2SString_H__
+#endif // __c2SString_H__

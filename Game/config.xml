@@ -1,0 +1,7 @@
+<!-- Config file for the game -->
+<config>
+  <app>
+    <title>Doblegat Engine</title>
+    <organization>JMC</organization>
+  </app>
+</config>
