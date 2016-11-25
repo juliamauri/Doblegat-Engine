@@ -25,40 +25,28 @@ public:
 	UIComponent_TYPE type;
 
 public:
-	UIComponents(int pos_x, int pos_y, UIComponent_TYPE type)
-	{
-		rect_position.x = pos_x;
-		rect_position.y = pos_y;
-		this->type = type;
-	}
+	UIComponents(UIComponent_TYPE type) : type(type) {}
 
-	UIComponents(int pos_x, int pos_y, int pos_w, int pos_h, int atlas_x, int atlas_y, int atlas_w, int atlas_h, UIComponent_TYPE type)
-	{
-		rect_position.x = pos_x;
-		rect_position.y = pos_y;
-		rect_position.w = pos_w;
-		rect_position.h = pos_h;
+	virtual void Set();
 
-		rect_atlas.x = atlas_x;
-		rect_atlas.y = atlas_y;
-		rect_atlas.w = atlas_w;
-		rect_atlas.h = atlas_h;
-
-		this->type = type;
-	}
-
-	UIComponents(SDL_Rect position, SDL_Rect atlas, UIComponent_TYPE type = UIComponent_TYPE::UIIMAGE) : rect_position(position), rect_atlas(atlas), type(type) { }
+private:
+	void SetImage(int pos_x, int pos_y, int pos_w, int pos_h, uint atlas_x, uint atlas_y, uint atlas_w, uint atlas_h);
+	void SetImage(SDL_Rect position, SDL_Rect atlas);
 };
 
 class UILabel : public UIComponents
 {
 public:
+	c2SString text;
 	SDL_Texture* text_img;
 	_TTF_Font*  font;
 
 public:
-	UILabel();
-	UILabel(int pos_x, int pos_y, const char* text);
+	UILabel() : UIComponents(UIComponent_TYPE::UILABEL) {}
+
+	void Set(int pos_x, int pos_y, const char* text, _TTF_Font*  font = nullptr);
+
+	void ChangeText(const char* text);
 };
 
 class UIButton : public UIComponents
@@ -89,6 +77,8 @@ public:
 	const char* GetStr();
 };
 
+typedef UIComponents UIImage;
+
 // ---------------------------------------------------
 class d1UIManager : public d1Module
 {
@@ -117,15 +107,20 @@ public:
 	// TODO 2: Create the factory methods
 	// Gui creation functions
 
-	UIComponents* addUIComponent(UIComponent_TYPE type, int pos_x = 0, int pos_y = 0, int pos_w = 0, int pos_h = 0, int atlas_x = 0, int atlas_y = 0, int atlas_w = 0, int atlas_h = 0, int label_x = 0, int label_y = 0, const char* text = nullptr);
-	UIComponents* addUIComponent(UIComponent_TYPE type, SDL_Rect position = {0,0,0,0}, SDL_Rect atlas = { 0,0,0,0 }, int label_x = 0, int label_y = 0, const char* text = nullptr);
+	UIComponents* addUIComponent(UIComponent_TYPE type);
 
 	const SDL_Texture* GetAtlas() const;
 
 	const c2List_item<UIComponents*>* GetFirstComponent() const;
 
+	const UIComponents* GetSelected();
+
+	void CheckMouseInUIComponent();
+
 private:
 	c2List<UIComponents*> components;
+
+	UIComponents* mouse_selection = NULL;
 
 	SDL_Texture* atlas;
 	c2SString atlas_file_name;

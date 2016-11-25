@@ -107,6 +107,11 @@ void d1Render::SetBackgroundColor(SDL_Color color)
 	background = color;
 }
 
+void d1Render::GetDimensionsFromTexture(SDL_Texture* tex, int& w, int& h)
+{
+	SDL_QueryTexture(tex, NULL, NULL, &w, &h);
+}
+
 void d1Render::SetViewPort(const SDL_Rect& rect)
 {
 	SDL_RenderSetViewport(renderer, &rect);

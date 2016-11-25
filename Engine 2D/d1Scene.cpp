@@ -50,8 +50,9 @@ bool d1Scene::Start()
 	uint height = 0;
 	App->win->GetWindowSize(width,height);
 
-	banner = (UIImage*)App->uimanager->addUIComponent(UIComponent_TYPE::UIIMAGE, width / 2, height / 4,0,0, 485, 829, 328, 103);
-	text = (UILabel*)App->uimanager->addUIComponent(UIComponent_TYPE::UILABEL, 0, 0, 0, 0, 0, 0, 0, 0, width / 2, height / 4 - 120, "Hello World");
+	banner = (UIImage*)App->uimanager->addUIComponent(UIComponent_TYPE::UIIMAGE/*, { (int)width / 2, (int)height / 4, 328, 103 }, { 485, 829, 328, 103 }*/);
+	text = (UILabel*)App->uimanager->addUIComponent(UIComponent_TYPE::UILABEL/*, 0, 0, 0, 0, 0, 0, 0, 0, width / 2, height / 4 - 120, "Hello World"*/);
+
 	return true;
 }
 
@@ -135,6 +136,14 @@ bool d1Scene::Update(float dt)
 		iPoint pos = App->map->MapToWorld(path->At(i)->x, path->At(i)->y);
 		App->render->Blit(debug_tex, pos.x, pos.y);
 	}
+
+	//UISelection
+	if (App->uimanager->GetSelected() == text)
+		text->ChangeText("It's hover");
+	else
+		text->ChangeText("Hello World!");
+
+
 
 	return true;
 }
