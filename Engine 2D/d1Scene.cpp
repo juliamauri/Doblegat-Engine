@@ -7,6 +7,7 @@
 #include "d1Render.h"
 #include "d1Window.h"
 #include "d1Map.h"
+#include "d1PathFinding.h"
 #include "d1Scene.h"
 
 
@@ -31,7 +32,17 @@ bool d1Scene::Awake()
 // Called before the first frame
 bool d1Scene::Start()
 {
-	App->map->Load("iso.tmx");
+	if (App->map->Load("iso_walk.tmx") == true)
+	{
+		int w, h;
+		uchar* data = NULL;
+		if (App->map->CreateWalkabilityMap(w, h, &data))
+			App->pathfinding->SetMap(w, h, data);
+
+		RELEASE_ARRAY(data);
+	}
+
+	debug_tex = App->tex->Load("maps/path2.png");
 	
 	return true;
 }
@@ -39,6 +50,30 @@ bool d1Scene::Start()
 // Called each loop iteration
 bool d1Scene::PreUpdate()
 {
+
+	// debug pathfing ------------------
+	static iPoint origin;
+	static bool origin_selected = false;
+
+	int x, y;
+	App->input->GetMousePosition(x, y);
+	iPoint p = App->render->ScreenToWorld(x, y);
+	p = App->map->WorldToMap(p.x, p.y);
+
+	if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
+	{
+		if (origin_selected == true)
+		{
+			App->pathfinding->CreatePath(origin, p);
+			origin_selected = false;
+		}
+		else
+		{
+			origin = p;
+			origin_selected = true;
+		}
+	}
+
 	return true;
 }
 
@@ -64,16 +99,35 @@ bool d1Scene::Update(float dt)
 		App->render->camera.x -= 1;
 
 	App->map->Draw();
-	
+
 	int x, y;
 	App->input->GetMousePosition(x, y);
 	iPoint map_coordinates = App->map->WorldToMap(x - App->render->camera.x, y - App->render->camera.y);
 	c2SString title("Map:%dx%d Tiles:%dx%d Tilesets:%d Tile:%d,%d",
-					App->map->data.width, App->map->data.height,
-					App->map->data.tile_width, App->map->data.tile_height,
-					App->map->data.tilesets.count(),
-					map_coordinates.x, map_coordinates.y);
+		App->map->data.width, App->map->data.height,
+		App->map->data.tile_width, App->map->data.tile_height,
+		App->map->data.tilesets.count(),
+		map_coordinates.x, map_coordinates.y);
+
 	App->win->SetTitle(title.GetString());
+
+	// Debug pathfinding ------------------------------
+	//int x, y;
+	App->input->GetMousePosition(x, y);
+	iPoint p = App->render->ScreenToWorld(x, y);
+	p = App->map->WorldToMap(p.x, p.y);
+	p = App->map->MapToWorld(p.x, p.y);
+
+	App->render->Blit(debug_tex, p.x, p.y);
+
+	const c2DynArray<iPoint>* path = App->pathfinding->GetLastPath();
+
+	for (uint i = 0; i < path->Count(); ++i)
+	{
+		iPoint pos = App->map->MapToWorld(path->At(i)->x, path->At(i)->y);
+		App->render->Blit(debug_tex, pos.x, pos.y);
+	}
+
 	return true;
 }
 

@@ -33,6 +33,7 @@ public:
 	bool CleanUp();
 
 private:
+	SDL_Texture* debug_tex;
 };
 
 #endif // __d1SCENE_H__

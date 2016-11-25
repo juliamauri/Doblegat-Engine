@@ -125,6 +125,7 @@
     <ClCompile Include="d1Input.cpp" />
     <ClCompile Include="d1Main.cpp" />
     <ClCompile Include="d1Map.cpp" />
+    <ClCompile Include="d1Pathfinding.cpp" />
     <ClCompile Include="d1Render.cpp" />
     <ClCompile Include="d1Scene.cpp" />
     <ClCompile Include="d1Textures.cpp" />
@@ -144,6 +145,7 @@
     <ClInclude Include="d1Input.h" />
     <ClInclude Include="d1Map.h" />
     <ClInclude Include="d1Module.h" />
+    <ClInclude Include="d1Pathfinding.h" />
     <ClInclude Include="d1Render.h" />
     <ClInclude Include="d1Scene.h" />
     <ClInclude Include="d1Textures.h" />

@@ -57,6 +57,9 @@
     <ClCompile Include="d1Map.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
+    <ClCompile Include="d1Pathfinding.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="d1App.h">
@@ -111,6 +114,9 @@
       <Filter>Modules</Filter>
     </ClInclude>
     <ClInclude Include="d1Map.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="d1Pathfinding.h">
       <Filter>Modules</Filter>
     </ClInclude>
   </ItemGroup>

@@ -6,15 +6,35 @@
 #include "c2Point.h"
 #include "d1Module.h"
 
+// TODO 5: Create a generic structure to hold properties
+// TODO 7: Our custom properties should have one method
+// to ask for the value of a custom property
 // ----------------------------------------------------
 struct Properties
 {
-	// TODO 5: Create a generic structure to hold properties
-	uint draw;
-	uint navigation;
+	struct Property
+	{
+		c2SString name;
+		int value;
+	};
 
-	// TODO 7: Our custom properties should have one method
-	// to ask for the value of a custom property
+	~Properties()
+	{
+		c2List_item<Property*>* item;
+		item = list.start;
+
+		while (item != NULL)
+		{
+			RELEASE(item->data);
+			item = item->next;
+		}
+
+		list.clear();
+	}
+
+	int Get(const char* name, int default_value = 0) const;
+
+	c2List<Property*>	list;
 };
 
 // ----------------------------------------------------
@@ -104,6 +124,7 @@ public:
 
 	iPoint MapToWorld(int x, int y) const;
 	iPoint WorldToMap(int x, int y) const;
+	bool CreateWalkabilityMap(int& width, int& height, uchar** buffer) const;
 
 private:
 

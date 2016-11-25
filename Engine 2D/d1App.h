@@ -15,6 +15,7 @@ class d1Audio;
 class d1FileSystem;
 class d1Scene;
 class d1Map;
+class d1PathFinding;
 
 class d1App
 {
@@ -87,6 +88,7 @@ public:
 	d1Scene*			scene;
 	d1FileSystem*		fs;
 	d1Map*				map;
+	d1PathFinding*		pathfinding;
 
 private:
 

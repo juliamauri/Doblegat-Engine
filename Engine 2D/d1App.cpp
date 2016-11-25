@@ -13,6 +13,7 @@
 #include "d1Scene.h"
 #include "d1FileSystem.h"
 #include "d1Map.h"
+#include "d1Pathfinding.h"
 #include "d1App.h"
 
 // Constructor
@@ -30,7 +31,8 @@ d1App::d1App(int argc, char* args[]) : argc(argc), args(args)
 	scene = new d1Scene();
 	fs = new d1FileSystem();
 	map = new d1Map();
-	
+	pathfinding = new d1PathFinding();
+
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -41,6 +43,7 @@ d1App::d1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(audio);
 	AddModule(map);
 	AddModule(scene);
+	AddModule(pathfinding);
 
 	// render last to swap buffer
 	AddModule(render);
