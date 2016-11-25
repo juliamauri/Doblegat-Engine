@@ -60,6 +60,15 @@
     <ClCompile Include="d1Pathfinding.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
+    <ClCompile Include="d1Fonts.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="d1PerfTimer.cpp">
+      <Filter>Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="d1Timer.cpp">
+      <Filter>Tools</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="d1App.h">
@@ -118,6 +127,15 @@
     </ClInclude>
     <ClInclude Include="d1Pathfinding.h">
       <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="d1Fonts.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="d1PerfTimer.h">
+      <Filter>Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="d1Timer.h">
+      <Filter>Tools</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

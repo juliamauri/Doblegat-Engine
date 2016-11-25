@@ -67,11 +67,6 @@ bool d1Render::PreUpdate()
 	return true;
 }
 
-bool d1Render::Update(float dt)
-{
-	return true;
-}
-
 bool d1Render::PostUpdate()
 {
 	SDL_SetRenderDrawColor(renderer, background.r, background.g, background.g, background.a);

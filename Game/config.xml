@@ -1,15 +1,23 @@
 <!-- Config file for the game -->
 
 <config>
-  <app>
-    <title>Doblegat Engine</title>
-    <organization>JMC</organization>
+  <app framerate_cap="">
+    <title>Pathfinding Test</title>
+    <organization>UPC</organization>
   </app>
 	
   <renderer>
-    <vsync value="false"/>
+    <vsync value="true"/>
   </renderer>
 
+  <font>
+    <default_font file="fonts/open_sans/OpenSans-Regular.ttf" size="12"/>
+  </font>
+
+  <gui>
+    <atlas file="gui/atlas.png"/>
+  </gui>
+    
   <window>
     <resolution width="1024" height="768" scale="1"/>
     <fullscreen value="false"/>
@@ -19,7 +27,7 @@
   </window>
 
   <file_system>
-      <path>data.zip</path>
+    <path>data.zip</path>
   </file_system>
 
   <map>
