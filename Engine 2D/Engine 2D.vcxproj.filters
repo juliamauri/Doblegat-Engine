@@ -69,6 +69,9 @@
     <ClCompile Include="d1Timer.cpp">
       <Filter>Tools</Filter>
     </ClCompile>
+    <ClCompile Include="d1UIManager.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="d1App.h">
@@ -136,6 +139,9 @@
     </ClInclude>
     <ClInclude Include="d1Timer.h">
       <Filter>Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="d1UIManager.h">
+      <Filter>Modules</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

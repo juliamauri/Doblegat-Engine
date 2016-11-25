@@ -15,7 +15,7 @@
 #include "d1Map.h"
 #include "d1Pathfinding.h"
 #include "d1Fonts.h"
-//#include "d1Gui.h"
+#include "d1UIManager.h"
 #include "d1App.h"
 
 // Constructor
@@ -33,7 +33,7 @@ d1App::d1App(int argc, char* args[]) : argc(argc), args(args)
 	map = new d1Map();
 	pathfinding = new d1PathFinding();
 	font = new d1Fonts();
-	//gui = new d1Gui();
+	uimanager = new d1UIManager();
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -45,7 +45,7 @@ d1App::d1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(map);
 	AddModule(pathfinding);
 	AddModule(font);
-	//AddModule(gui);
+	AddModule(uimanager);
 
 	// scene last
 	AddModule(scene);

@@ -4,6 +4,8 @@
 #include "d1Module.h"
 
 struct SDL_Texture;
+class UIImage;
+class UILabel;
 
 class d1Scene : public d1Module
 {
@@ -34,6 +36,8 @@ public:
 
 private:
 	SDL_Texture* debug_tex;
+	UIImage* banner;
+	UILabel* text;
 };
 
 #endif // __d1SCENE_H__

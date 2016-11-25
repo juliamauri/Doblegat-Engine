@@ -18,7 +18,7 @@ class d1Scene;
 class d1Map;
 class d1PathFinding;
 class d1Fonts;
-//class d1Gui;
+class d1UIManager;
 
 class d1App
 {
@@ -93,7 +93,7 @@ public:
 	d1Map*				map = NULL;
 	d1PathFinding*		pathfinding = NULL;
 	d1Fonts*			font = NULL;
-	//d1Gui*				gui = NULL;
+	d1UIManager*				uimanager = NULL;
 
 private:
 

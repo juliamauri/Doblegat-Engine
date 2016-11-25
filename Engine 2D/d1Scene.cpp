@@ -8,6 +8,7 @@
 #include "d1Window.h"
 #include "d1Map.h"
 #include "d1PathFinding.h"
+#include "d1UIManager.h"
 #include "d1Scene.h"
 
 
@@ -43,7 +44,14 @@ bool d1Scene::Start()
 	}
 
 	debug_tex = App->tex->Load("maps/path2.png");
-	
+
+	//Definition UIElements
+	uint width = 0;
+	uint height = 0;
+	App->win->GetWindowSize(width,height);
+
+	banner = (UIImage*)App->uimanager->addUIComponent(UIComponent_TYPE::UIIMAGE, width / 2, height / 4,0,0, 485, 829, 328, 103);
+	text = (UILabel*)App->uimanager->addUIComponent(UIComponent_TYPE::UILABEL, 0, 0, 0, 0, 0, 0, 0, 0, width / 2, height / 4 - 120, "Hello World");
 	return true;
 }
 
@@ -87,16 +95,16 @@ bool d1Scene::Update(float dt)
 		App->SaveGame("save_game.xml");
 	
 	if(App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
-		App->render->camera.y += 1;
+		App->render->camera.y += floor(200.0f * dt);
 
 	if(App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
-		App->render->camera.y -= 1;
+		App->render->camera.y -= floor(200.0f * dt);;
 
 	if(App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
-		App->render->camera.x += 1;
+		App->render->camera.x += floor(200.0f * dt);;
 
 	if(App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
-		App->render->camera.x -= 1;
+		App->render->camera.x -= floor(200.0f * dt);;
 
 	App->map->Draw();
 
