@@ -38,10 +38,23 @@ bool d1UIManager::Start()
 // Update all guis
 bool d1UIManager::PreUpdate()
 {
-	CheckMouseInUIComponent();
+	/*
+	int x_mouse = 0;
+	int y_mouse = 0;
+
+	App->input->GetMousePosition(x_mouse, y_mouse);
+
+
+	if ((x_mouse > mouse_selection->rect_position.x) && (x_mouse < mouse_selection->rect_position.x + mouse_selection->rect_position.w) && (y_mouse > mouse_selection->rect_position.y) && (y_mouse < mouse_selection->rect_position.y + mouse_selection->rect_position.h))
+	{
+		
+	}
+	*/
 
 	return true;
+	
 }
+
 
 // Called after all Updates
 bool d1UIManager::PostUpdate()
@@ -65,19 +78,19 @@ UIComponents* d1UIManager::addUIComponent(UIComponent_TYPE type)
 
 	if (type == UIComponent_TYPE::UIBUTTON)
 	{
-		components.add(ret = new UIButton(pos_x, pos_y, pos_w, pos_h, atlas_x, atlas_y, atlas_w, atlas_h, label_x, label_y, text));
+		components.add(ret = new UIButton(UIComponent_TYPE::UIBUTTON));
 	}
 	else if (type == UIComponent_TYPE::UIIMAGE)
 	{
-		components.add(ret = new UIComponents(pos_x, pos_y, pos_w, pos_h, atlas_x, atlas_y, atlas_w, atlas_h, type));
+		components.add(ret = new UIComponents(UIComponent_TYPE::UIIMAGE));
 	}
 	else if(type == UIComponent_TYPE::UIINPUT)
 	{
-		components.add(ret = new UIInput(pos_x, pos_y, pos_w, pos_h, atlas_x, atlas_y, atlas_w, atlas_h, label_x, label_y, text));
+		components.add(ret = new UIInput(UIComponent_TYPE::UIINPUT));
 	}
 	else if (type == UIComponent_TYPE::UILABEL)
 	{
-		components.add(ret = new UILabel(label_x, label_y, text));
+		components.add(ret = new UILabel(UIComponent_TYPE::UILABEL));
 	}
 
 	return ret;
@@ -94,54 +107,6 @@ const c2List_item<UIComponents*>* d1UIManager::GetFirstComponent() const
 	return components.start;
 }
 
-const UIComponents * d1UIManager::GetSelected()
-{
-	return mouse_selection;
-}
-
-void d1UIManager::CheckMouseInUIComponent()
-{
-	int x_mouse = 0;
-	int y_mouse = 0;
-
-	App->input->GetMousePosition(x_mouse, y_mouse);
-	bool not_selected = true;
-
-	if (mouse_selection != nullptr)
-	{
-		if ((x_mouse > mouse_selection->rect_position.x) && (x_mouse < mouse_selection->rect_position.x + mouse_selection->rect_position.w) && (y_mouse > mouse_selection->rect_position.y) && (y_mouse < mouse_selection->rect_position.y + mouse_selection->rect_position.h))
-		{
-			not_selected = false;
-		}
-		else
-			not_selected = true;
-	}
-	else
-	{
-		not_selected = true;
-	}
-
-	if (not_selected)
-	{
-		c2List_item<UIComponents*>* item = components.start;
-
-		for (; item != NULL; item = item->next)
-		{
-			UIComponents* uielement = item->data;
-
-			if ((x_mouse > uielement->rect_position.x) && (x_mouse < uielement->rect_position.x + uielement->rect_position.w) && (y_mouse > uielement->rect_position.y) && (y_mouse < uielement->rect_position.y + uielement->rect_position.h))
-			{
-				mouse_selection = uielement;
-				not_selected = false;
-				break;
-			}
-			else
-				mouse_selection = nullptr;
-		}
-	}
-
-}
-
 void d1UIManager::drawAllComponents()
 {
 	c2List_item<UIComponents*>* item = components.start;
@@ -156,7 +121,9 @@ void d1UIManager::drawAllComponents()
 
 		if (*type == UIComponent_TYPE::UIBUTTON)
 		{
+			UIComponents* uibutton = item->data;
 
+			App->render->Blit(atlas, uibutton->rect_position.x - App->render->camera.x, uibutton->rect_position.y - App->render->camera.y, &uibutton->rect_atlas);
 		}
 		else if (*type == UIComponent_TYPE::UIIMAGE)
 		{
@@ -166,7 +133,9 @@ void d1UIManager::drawAllComponents()
 		}
 		else if (*type == UIComponent_TYPE::UIINPUT)
 		{
+			UIComponents* uiinput = item->data;
 
+			App->render->Blit(atlas, uiinput->rect_position.x - App->render->camera.x, uiinput->rect_position.y - App->render->camera.y, &uiinput->rect_atlas);
 		}
 		else if (*type == UIComponent_TYPE::UILABEL)
 		{
@@ -178,26 +147,6 @@ void d1UIManager::drawAllComponents()
 }
 
 // class uimanager ---------------------------------------------------
-
-UIButton::UIButton(int pos_x, int pos_y, int pos_w, int pos_h, int atlas_x, int atlas_y, int atlas_w, int atlas_h, int label_x, int label_y, const char * text_title) : UIComponents(pos_x, pos_y, pos_w, pos_h, atlas_x, atlas_y, atlas_w, atlas_h, UIComponent_TYPE::UIBUTTON)
-{
-	title = (UILabel*)App->uimanager->addUIComponent(UIComponent_TYPE::UILABEL, 0, 0, 0, 0, 0, 0, 0, 0, label_x, label_y, text_title);
-}
-
-UIButton::UIButton(SDL_Rect position, SDL_Rect atlas, int label_x, int label_y, const char * text_title) : UIComponents(position, atlas, UIComponent_TYPE::UIBUTTON)
-{
-	title = (UILabel*)App->uimanager->addUIComponent(UIComponent_TYPE::UILABEL, 0, 0, 0, 0, 0, 0, 0, 0, label_x, label_y, text_title);
-}
-
-UIInput::UIInput(int pos_x, int pos_y, int pos_w, int pos_h, int atlas_x, int atlas_y, int atlas_w, int atlas_h, int label_x, int label_y, const char * text_title) : UIComponents(pos_x, pos_y, pos_w, pos_h, atlas_x, atlas_y, atlas_w, atlas_h, UIComponent_TYPE::UIINPUT)
-{
-	title = (UILabel*)App->uimanager->addUIComponent(UIComponent_TYPE::UILABEL, 0, 0, 0, 0, 0, 0, 0, 0, label_x, label_y, text_title);
-}
-
-UIInput::UIInput(SDL_Rect position, SDL_Rect atlas, int label_x, int label_y, const char * text_title) : UIComponents(position, atlas, UIComponent_TYPE::UIINPUT)
-{
-	title = (UILabel*)App->uimanager->addUIComponent(UIComponent_TYPE::UILABEL, 0, 0, 0, 0, 0, 0, 0, 0, label_x, label_y, text_title);
-}
 
 void UILabel::Set(int pos_x, int pos_y, const char * text, _TTF_Font*  font)
 {
@@ -221,7 +170,12 @@ void UILabel::ChangeText(const char* text)
 	}
 }
 
-void UIComponents::SetImage(int pos_x, int pos_y, int pos_w, int pos_h, uint atlas_x, uint atlas_y, uint atlas_w, uint atlas_h)
+UIButton::UIButton(UIComponent_TYPE type) : UIComponents(type)
+{
+	title = (UILabel*)App->uimanager->addUIComponent(UIComponent_TYPE::UILABEL);
+}
+
+void UIButton::Set(int pos_x, int pos_y, int pos_w, int pos_h, uint atlas_x, uint atlas_y, uint atlas_w, uint atlas_h)
 {
 	rect_position.x = pos_x;
 	rect_position.y = pos_y;
@@ -234,7 +188,55 @@ void UIComponents::SetImage(int pos_x, int pos_y, int pos_w, int pos_h, uint atl
 	rect_atlas.h = atlas_h;
 }
 
-void UIComponents::SetImage(SDL_Rect position, SDL_Rect atlas)
+void UIButton::Set(const SDL_Rect & position, const SDL_Rect & atlas)
+{
+	rect_position = position;
+	rect_atlas = atlas;
+}
+
+UIInput::UIInput(UIComponent_TYPE type) : UIComponents(type)
+{
+	title = (UILabel*)App->uimanager->addUIComponent(UIComponent_TYPE::UILABEL);
+}
+
+void UIInput::Set(int pos_x, int pos_y, int pos_w, int pos_h, uint atlas_x, uint atlas_y, uint atlas_w, uint atlas_h)
+{
+	rect_position.x = pos_x;
+	rect_position.y = pos_y;
+	rect_position.w = pos_w;
+	rect_position.h = pos_h;
+
+	rect_atlas.x = atlas_x;
+	rect_atlas.y = atlas_y;
+	rect_atlas.w = atlas_w;
+	rect_atlas.h = atlas_h;
+}
+
+void UIInput::Set(const SDL_Rect & position, const SDL_Rect & atlas)
+{
+	rect_position = position;
+	rect_atlas = atlas;
+}
+
+UIImage::UIImage(UIComponent_TYPE type) : UIComponents(type)
+{
+
+}
+
+void UIImage::Set(int pos_x, int pos_y, int pos_w, int pos_h, uint atlas_x, uint atlas_y, uint atlas_w, uint atlas_h)
+{
+	rect_position.x = pos_x;
+	rect_position.y = pos_y;
+	rect_position.w = pos_w;
+	rect_position.h = pos_h;
+
+	rect_atlas.x = atlas_x;
+	rect_atlas.y = atlas_y;
+	rect_atlas.w = atlas_w;
+	rect_atlas.h = atlas_h;
+}
+
+void UIImage::Set(const SDL_Rect & position, const SDL_Rect & atlas)
 {
 	rect_position = position;
 	rect_atlas = atlas;

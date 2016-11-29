@@ -4,8 +4,8 @@
 #include "d1Module.h"
 
 struct SDL_Texture;
-class UIImage;
 class UILabel;
+class UIImage;
 
 class d1Scene : public d1Module
 {

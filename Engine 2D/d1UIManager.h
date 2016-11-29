@@ -27,11 +27,7 @@ public:
 public:
 	UIComponents(UIComponent_TYPE type) : type(type) {}
 
-	virtual void Set();
-
-private:
-	void SetImage(int pos_x, int pos_y, int pos_w, int pos_h, uint atlas_x, uint atlas_y, uint atlas_w, uint atlas_h);
-	void SetImage(SDL_Rect position, SDL_Rect atlas);
+	virtual void Set() {};
 };
 
 class UILabel : public UIComponents
@@ -42,7 +38,7 @@ public:
 	_TTF_Font*  font;
 
 public:
-	UILabel() : UIComponents(UIComponent_TYPE::UILABEL) {}
+	UILabel(UIComponent_TYPE type) : UIComponents(type) {}
 
 	void Set(int pos_x, int pos_y, const char* text, _TTF_Font*  font = nullptr);
 
@@ -56,11 +52,10 @@ public:
 	UILabel* title;
 
 public:
-	UIButton(int pos_x, int pos_y, int pos_w, int pos_h, int atlas_x, int atlas_y, int atlas_w, int atlas_h, int label_x, int label_y, const char* text_title);
+	UIButton(UIComponent_TYPE type);
 
-	UIButton(SDL_Rect position, SDL_Rect atlas, int label_x, int label_y, const char* text_title);
-
-	void action();
+	void Set(int pos_x, int pos_y, int pos_w, int pos_h, uint atlas_x, uint atlas_y, uint atlas_w, uint atlas_h);
+	void Set(const SDL_Rect& position, const SDL_Rect& atlas);
 };
 
 class UIInput : public UIComponents
@@ -70,14 +65,22 @@ public:
 	UILabel* title;
 
 public:
-	UIInput(int pos_x, int pos_y, int pos_w, int pos_h, int atlas_x, int atlas_y, int atlas_w, int atlas_h, int label_x, int label_y, const char* text_title);
+	UIInput(UIComponent_TYPE type);
 
-	UIInput(SDL_Rect position, SDL_Rect atlas, int label_x, int label_y, const char* text_title);
+	void Set(int pos_x, int pos_y, int pos_w, int pos_h, uint atlas_x, uint atlas_y, uint atlas_w, uint atlas_h);
+	void Set(const SDL_Rect& position, const SDL_Rect& atlas);
 
 	const char* GetStr();
 };
 
-typedef UIComponents UIImage;
+class UIImage : public UIComponents
+{
+public:
+	UIImage(UIComponent_TYPE type);
+
+	void Set(int pos_x, int pos_y, int pos_w, int pos_h, uint atlas_x, uint atlas_y, uint atlas_w, uint atlas_h);
+	void Set(const SDL_Rect& position, const SDL_Rect& atlas);
+};
 
 // ---------------------------------------------------
 class d1UIManager : public d1Module
@@ -113,14 +116,8 @@ public:
 
 	const c2List_item<UIComponents*>* GetFirstComponent() const;
 
-	const UIComponents* GetSelected();
-
-	void CheckMouseInUIComponent();
-
 private:
 	c2List<UIComponents*> components;
-
-	UIComponents* mouse_selection = NULL;
 
 	SDL_Texture* atlas;
 	c2SString atlas_file_name;
