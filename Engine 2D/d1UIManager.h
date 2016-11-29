@@ -9,6 +9,21 @@ struct _TTF_Font;
 
 // TODO 1: Create your structure of classes
 
+enum UIComponent_Stat
+{
+	SELECTED,
+	UNSELECTED,
+
+	CLICKL_DOWN,
+	CLICKR_DOWN,
+
+	CLICKL_REPEAT,
+	CLICKR_REPEAT,
+
+	CLICKL_UP,
+	CLICKR_UP
+};
+
 enum UIComponent_TYPE
 {
 	UILABEL,
@@ -22,7 +37,10 @@ class UIComponents
 public:
 	SDL_Rect rect_position;
 	SDL_Rect rect_atlas;
+
 	UIComponent_TYPE type;
+
+	UIComponent_Stat stat = UIComponent_Stat::UNSELECTED;
 
 public:
 	UIComponents(UIComponent_TYPE type) : type(type) {}

@@ -141,14 +141,31 @@ bool d1Scene::Update(float dt)
 	}
 
 	//UISelection
-
-	/*
-	if (App->uimanager->GetSelected() == text)
-		text->ChangeText("It's hover");
-	else
-		text->ChangeText("Hello World!");
-	*/
-
+	if (text->stat == UIComponent_Stat::SELECTED)
+	{
+		if(right_click == true)
+			text->ChangeText("Hello World - right click");
+		else if(left_click == true)
+			text->ChangeText("Hello World - left click");
+		else
+			text->ChangeText("It's hover");
+	}
+	else if (text->stat == UIComponent_Stat::UNSELECTED)
+	{
+		text->ChangeText("Hello World");
+		right_click = false;
+		left_click = false;
+	}
+	else if (text->stat == UIComponent_Stat::CLICKR_DOWN)
+	{
+		right_click = true;
+		left_click = false;
+	}
+	else if (text->stat == UIComponent_Stat::CLICKL_DOWN)
+	{
+		left_click = true;
+		right_click = false;
+	}
 
 	return true;
 }

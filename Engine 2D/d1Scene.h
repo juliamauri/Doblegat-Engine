@@ -38,6 +38,9 @@ private:
 	SDL_Texture* debug_tex;
 	UIImage* banner;
 	UILabel* text;
+
+	bool right_click = false;
+	bool left_click = false;
 };
 
 #endif // __d1SCENE_H__

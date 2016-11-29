@@ -38,19 +38,56 @@ bool d1UIManager::Start()
 // Update all guis
 bool d1UIManager::PreUpdate()
 {
-	/*
 	int x_mouse = 0;
 	int y_mouse = 0;
 
 	App->input->GetMousePosition(x_mouse, y_mouse);
 
+	c2List_item<UIComponents*>* item = components.start;
 
-	if ((x_mouse > mouse_selection->rect_position.x) && (x_mouse < mouse_selection->rect_position.x + mouse_selection->rect_position.w) && (y_mouse > mouse_selection->rect_position.y) && (y_mouse < mouse_selection->rect_position.y + mouse_selection->rect_position.h))
+	for (; item != NULL; item = item->next)
 	{
-		
-	}
-	*/
+		UIComponents* component = item->data;
 
+		if ((x_mouse > component->rect_position.x) && (x_mouse < component->rect_position.x + component->rect_position.w) && (y_mouse > component->rect_position.y) && (y_mouse < component->rect_position.y + component->rect_position.h))
+		{
+			component->stat = UIComponent_Stat::SELECTED;
+
+			if (App->input->GetMouseButtonDown(1) == KEY_DOWN)
+			{
+				if(component->stat == UIComponent_Stat::SELECTED)
+					component->stat = UIComponent_Stat::CLICKL_DOWN;
+				else
+					component->stat = UIComponent_Stat::CLICKL_REPEAT;
+			}
+			else if (App->input->GetMouseButtonDown(1) == KEY_UP)
+			{
+				if (component->stat == UIComponent_Stat::CLICKL_REPEAT || component->stat == UIComponent_Stat::CLICKL_DOWN)
+					component->stat = UIComponent_Stat::CLICKL_UP;
+				else
+					component->stat = UIComponent_Stat::SELECTED;
+			}
+
+			if (App->input->GetMouseButtonDown(3) == KEY_DOWN)
+			{
+				if (component->stat == UIComponent_Stat::SELECTED)
+					component->stat = UIComponent_Stat::CLICKR_DOWN;
+				else
+					component->stat = UIComponent_Stat::CLICKR_REPEAT;
+			}
+			else if (App->input->GetMouseButtonDown(3) == KEY_UP)
+			{
+				if (component->stat == UIComponent_Stat::CLICKR_REPEAT || component->stat == UIComponent_Stat::CLICKR_DOWN)
+					component->stat = UIComponent_Stat::CLICKR_UP;
+				else
+					component->stat = UIComponent_Stat::SELECTED;
+			}
+
+		}
+		else
+			component->stat = UIComponent_Stat::UNSELECTED;
+	
+	}
 	return true;
 	
 }
