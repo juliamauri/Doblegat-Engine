@@ -1,3 +1,6 @@
+#define RIGHT_CLICK 3
+#define LEFT_CLICK 1
+
 #include "c2Defs.h"
 #include "c2Log.h"
 #include "d1App.h"
@@ -53,14 +56,14 @@ bool d1UIManager::PreUpdate()
 		{
 			component->stat = UIComponent_Stat::SELECTED;
 
-			if (App->input->GetMouseButtonDown(1) == KEY_DOWN)
+			if (App->input->GetMouseButtonDown(LEFT_CLICK) == KEY_DOWN)
 			{
 				if(component->stat == UIComponent_Stat::SELECTED)
 					component->stat = UIComponent_Stat::CLICKL_DOWN;
 				else
 					component->stat = UIComponent_Stat::CLICKL_REPEAT;
 			}
-			else if (App->input->GetMouseButtonDown(1) == KEY_UP)
+			else if (App->input->GetMouseButtonDown(LEFT_CLICK) == KEY_UP)
 			{
 				if (component->stat == UIComponent_Stat::CLICKL_REPEAT || component->stat == UIComponent_Stat::CLICKL_DOWN)
 					component->stat = UIComponent_Stat::CLICKL_UP;
@@ -68,14 +71,14 @@ bool d1UIManager::PreUpdate()
 					component->stat = UIComponent_Stat::SELECTED;
 			}
 
-			if (App->input->GetMouseButtonDown(3) == KEY_DOWN)
+			if (App->input->GetMouseButtonDown(RIGHT_CLICK) == KEY_DOWN)
 			{
 				if (component->stat == UIComponent_Stat::SELECTED)
 					component->stat = UIComponent_Stat::CLICKR_DOWN;
 				else
 					component->stat = UIComponent_Stat::CLICKR_REPEAT;
 			}
-			else if (App->input->GetMouseButtonDown(3) == KEY_UP)
+			else if (App->input->GetMouseButtonDown(RIGHT_CLICK) == KEY_UP)
 			{
 				if (component->stat == UIComponent_Stat::CLICKR_REPEAT || component->stat == UIComponent_Stat::CLICKR_DOWN)
 					component->stat = UIComponent_Stat::CLICKR_UP;
