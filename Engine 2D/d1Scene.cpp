@@ -167,6 +167,7 @@ bool d1Scene::Update(float dt)
 		right_click = false;
 	}
 
+
 	return true;
 }
 

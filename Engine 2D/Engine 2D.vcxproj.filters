@@ -143,5 +143,11 @@
     <ClInclude Include="d1UIManager.h">
       <Filter>Modules</Filter>
     </ClInclude>
+    <ClInclude Include="c2Queue.h">
+      <Filter>Containers</Filter>
+    </ClInclude>
+    <ClInclude Include="c2Graph.h">
+      <Filter>Containers</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

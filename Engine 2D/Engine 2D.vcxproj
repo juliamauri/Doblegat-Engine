@@ -139,9 +139,11 @@
   <ItemGroup>
     <ClInclude Include="c2Defs.h" />
     <ClInclude Include="c2DynArray.h" />
+    <ClInclude Include="c2Graph.h" />
     <ClInclude Include="c2List.h" />
     <ClInclude Include="c2Log.h" />
     <ClInclude Include="c2Point.h" />
+    <ClInclude Include="c2Queue.h" />
     <ClInclude Include="c2SString.h" />
     <ClInclude Include="d1App.h" />
     <ClInclude Include="d1Audio.h" />

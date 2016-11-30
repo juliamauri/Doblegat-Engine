@@ -41,6 +41,7 @@ bool d1UIManager::Start()
 // Update all guis
 bool d1UIManager::PreUpdate()
 {
+	/*
 	int x_mouse = 0;
 	int y_mouse = 0;
 
@@ -92,7 +93,7 @@ bool d1UIManager::PreUpdate()
 	
 	}
 	return true;
-	
+	*/
 }
 
 
@@ -118,20 +119,30 @@ UIComponents* d1UIManager::addUIComponent(UIComponent_TYPE type)
 
 	if (type == UIComponent_TYPE::UIBUTTON)
 	{
-		components.add(ret = new UIButton(UIComponent_TYPE::UIBUTTON));
+		//components.add(ret = new UIButton(UIComponent_TYPE::UIBUTTON));
+
+		components.push_back(ret = new UIButton(UIComponent_TYPE::UIBUTTON));
 	}
 	else if (type == UIComponent_TYPE::UIIMAGE)
 	{
-		components.add(ret = new UIComponents(UIComponent_TYPE::UIIMAGE));
+		//components.add(ret = new UIComponents(UIComponent_TYPE::UIIMAGE));
+
+		components.push_back(ret = new UIComponents(UIComponent_TYPE::UIIMAGE));
 	}
 	else if(type == UIComponent_TYPE::UIINPUT)
 	{
-		components.add(ret = new UIInput(UIComponent_TYPE::UIINPUT));
+		//components.add(ret = new UIInput(UIComponent_TYPE::UIINPUT));
+
+		components.push_back(ret = new UIInput(UIComponent_TYPE::UIINPUT));
 	}
 	else if (type == UIComponent_TYPE::UILABEL)
 	{
-		components.add(ret = new UILabel(UIComponent_TYPE::UILABEL));
+		//components.add(ret = new UILabel(UIComponent_TYPE::UILABEL));
+
+		components.push_back(ret = new UILabel(UIComponent_TYPE::UILABEL));
 	}
+
+	components.
 
 	return ret;
 }
