@@ -14,10 +14,10 @@ template<class tdata>
 struct c2Queue_item
 {
 	tdata					data;
-	int						priority;
+	c2List<uint>		priority;
 	c2Queue_item<tdata>*   next = nullptr;
 
-	c2Queue_item(const tdata& _data, int priority) : data(_data), priority(priority)
+	c2Queue_item(const tdata& _data,const c2DynArray<uint>& priority) : data(_data), priority(priority)
 	{}
 };
 
@@ -78,7 +78,7 @@ public:
 	/**
 	* push new item
 	*/
-	void Push(const tdata& item, int priority)
+	void Push(const tdata& item,const c2DynArray<uint>& priority)
 	{
 		c2Queue_item<tdata>*   p_data_item;
 		p_data_item = new c2Queue_item < tdata >(item, priority);
@@ -94,10 +94,21 @@ public:
 			c2Queue_item<tdata>* prev = start;
 			c2Queue_item<tdata>* tmp = start;
 
-			while (tmp && tmp->priority <= priority)
+			uint indexes = priority.Count();
+
+			for (uint i = 0; i < indexes; i++)
 			{
-				prev = tmp;
-				tmp = tmp->next;
+				if (tmp == nullptr)
+					break;
+
+				if (tmp->priority.Count() < i + 1)
+					continue;
+				
+				while (tmp && tmp->priority[i] <= priority[i] && tmp->priority.Count() <= i + 1)
+				{
+					prev = tmp;
+					tmp = tmp->next;
+				}
 			}
 
 			p_data_item->next = tmp;

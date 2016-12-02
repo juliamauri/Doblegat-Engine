@@ -138,7 +138,7 @@ public:
 	//const c2List_item<UIComponents*>* GetFirstComponent() const;
 
 private:
-	c2Graph<UIComponents*> components;
+	//c2Graph<UIComponents*> components;
 
 	//c2List<UIComponents*> components;
 

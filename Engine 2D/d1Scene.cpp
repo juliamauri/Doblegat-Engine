@@ -1,5 +1,8 @@
 #include "c2Defs.h"
 #include "c2Log.h"
+
+#include "c2Queue.h"
+
 #include "d1App.h"
 #include "d1Input.h"
 #include "d1Textures.h"
@@ -50,11 +53,13 @@ bool d1Scene::Start()
 	uint height = 0;
 	App->win->GetWindowSize(width,height);
 
+	/*
 	banner = (UIImage*)App->uimanager->addUIComponent(UIComponent_TYPE::UIIMAGE);
 	banner->Set({ (int)width / 2, (int)height / 4, 328, 103 }, { 485, 829, 328, 103 });
 
 	text = (UILabel*)App->uimanager->addUIComponent(UIComponent_TYPE::UILABEL);
 	text->Set(width / 2, height / 4 - 120, "Hello World");
+	*/
 
 	return true;
 }
@@ -140,6 +145,7 @@ bool d1Scene::Update(float dt)
 		App->render->Blit(debug_tex, pos.x, pos.y);
 	}
 
+	/*
 	//UISelection
 	if (text->stat == UIComponent_Stat::SELECTED)
 	{
@@ -166,7 +172,75 @@ bool d1Scene::Update(float dt)
 		left_click = true;
 		right_click = false;
 	}
+	*/
 
+	//Testing Queue
+	uint temp;
+
+	c2Queue<uint> test;
+
+	c2DynArray<uint> order; 
+
+	order.PushBack(1);
+	test.Push(1, order); //1
+
+	order.PushBack(1);
+	test.Push(1, order);//11
+
+	order.PushBack(1);
+	test.Push(1, order);//111
+
+	order.Pop(temp);
+	
+
+	order.Change(2, 1);
+	test.Push(1, order);//12
+
+	order.Change(temp + 2, 1);
+	test.Push(1, order);//13
+
+	order.PushBack(1);
+	test.Push(1, order);//131
+
+	order.Change(2, 2);
+	test.Push(1, order);//132
+
+	order.Pop(temp);
+	order.Pop(temp);
+
+	order.Change(2, 0);
+	test.Push(1, order);//2
+
+	order.PushBack(1);
+	test.Push(1, order);//21
+
+	order.Change(2, 1);
+	test.Push(1, order);//22
+
+	order.PushBack(1);
+	test.Push(1, order);//221
+
+	order.Pop(temp);
+
+	order.Change(3, 1);
+	test.Push(1, order);//23
+
+	order.PushBack(1);
+	test.Push(1, order);//231
+
+	order.Change(2, 2);
+	test.Push(1, order);//232
+
+	order.Pop(temp);
+	order.Pop(temp);
+
+	order.Change(3, 0);
+	test.Push(1, order);//3
+
+	order.PushBack(1);
+	test.Push(1, order);//31
+
+	test.start;
 
 	return true;
 }

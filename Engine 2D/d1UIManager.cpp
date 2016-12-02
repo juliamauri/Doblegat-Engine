@@ -119,6 +119,7 @@ UIComponents* d1UIManager::addUIComponent(UIComponent_TYPE type)
 {
 	UIComponents* ret = nullptr;
 
+	/*
 	if (type == UIComponent_TYPE::UIBUTTON)
 	{
 		//components.add(ret = new UIButton(UIComponent_TYPE::UIBUTTON));
@@ -145,6 +146,8 @@ UIComponents* d1UIManager::addUIComponent(UIComponent_TYPE type)
 	}
 
 	//components.
+	
+	*/
 
 	return ret;
 }
