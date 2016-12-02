@@ -39,6 +39,7 @@ bool d1UIManager::Start()
 }
 
 // Update all guis
+
 bool d1UIManager::PreUpdate()
 {
 	/*
@@ -92,15 +93,16 @@ bool d1UIManager::PreUpdate()
 			component->stat = UIComponent_Stat::UNSELECTED;
 	
 	}
-	return true;
 	*/
+	return true;
+	
 }
 
 
 // Called after all Updates
 bool d1UIManager::PostUpdate()
 {
-	drawAllComponents();
+	//drawAllComponents();
 	
 	return true;
 }
@@ -142,7 +144,7 @@ UIComponents* d1UIManager::addUIComponent(UIComponent_TYPE type)
 		components.push_back(ret = new UILabel(UIComponent_TYPE::UILABEL));
 	}
 
-	components.
+	//components.
 
 	return ret;
 }
@@ -152,7 +154,7 @@ const SDL_Texture* d1UIManager::GetAtlas() const
 {
 	return atlas;
 }
-
+/*
 const c2List_item<UIComponents*>* d1UIManager::GetFirstComponent() const
 {
 	return components.start;
@@ -196,6 +198,7 @@ void d1UIManager::drawAllComponents()
 		}
 	}
 }
+*/
 
 // class uimanager ---------------------------------------------------
 

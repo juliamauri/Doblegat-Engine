@@ -135,7 +135,7 @@ public:
 
 	const SDL_Texture* GetAtlas() const;
 
-	const c2List_item<UIComponents*>* GetFirstComponent() const;
+	//const c2List_item<UIComponents*>* GetFirstComponent() const;
 
 private:
 	c2Graph<UIComponents*> components;
@@ -148,6 +148,6 @@ private:
 
 
 private:
-	void drawAllComponents();
+	//void drawAllComponents();
 };
 #endif // __d1GUIMANAGER_H__

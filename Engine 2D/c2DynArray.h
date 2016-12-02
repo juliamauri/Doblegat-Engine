@@ -150,7 +150,7 @@ public:
 		return result;
 	}
 
-	uint find(const TYPE& value)
+	uint find(const VALUE& value)
 	{
 		uint i = 0;
 		for (; i < num_elements; ++i)

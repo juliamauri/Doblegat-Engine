@@ -149,7 +149,7 @@ bool d1Scene::Update(float dt)
 			text->ChangeText("Hello World - left click");
 		else
 			text->ChangeText("It's hover");
-	}
+	} 
 	else if (text->stat == UIComponent_Stat::UNSELECTED)
 	{
 		text->ChangeText("Hello World");

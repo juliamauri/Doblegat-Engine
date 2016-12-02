@@ -33,7 +33,7 @@ public:
 				return true;
 
 			// Add ourselves as a visited node so we never come back here
-			visited.push_back(this);
+			visited.PushBack(this);
 	
 			// Recursively call all our links that have not been visited
 			for(const c2List_item<vertice*>* item = links.start; item; item = item->next())
@@ -75,17 +75,17 @@ public:
 		c2Queue<const vertice*> queue;
 
 		// Add first node as visited
-		visited.push_back(src);
+		visited.PushBack(src);
 		
 		// Add first node as the one to begin with
-		queue.push(src);
+		queue.Push(src);
 
 		const vertice* current;
 		while(queue.Pop(current) == true)
 		{
 			
 			// Iterate all links
-			const c2List_item<vertice*>* item = current
+			const c2List_item<vertice*>* item = current;
 			for(; item != nullptr; item = item->next())
 			{
 				// If we found destination, we are finish
@@ -96,8 +96,8 @@ public:
 				if(visited.find(item->data) == visited.size())
 				{
 					// If not mark is as visited and add it to the queue
-					visited.push_back(item->data);
-					queue.push(item->data);
+					visited.PushBack(item->data);
+					queue.Push(item->data);
 				}
 			}
 		}
@@ -114,6 +114,8 @@ public:
 		return src->CanReach(dst, visited);
 	}
 
+
+
 	unsigned int size() const
 	{
 		return vertices.size();
@@ -121,7 +123,7 @@ public:
 
 	void clear()
 	{
-		const c2List<vertice*>::node* p = vertices.front_node();
+		const c2List_item<vertice*>* p = vertices.start;
 		while(p != nullptr)
 		{
 			RELEASE(p->data);

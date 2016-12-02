@@ -217,6 +217,23 @@ public:
 		return(*this);
 	}
 
+	//Data Mangement
+	c2List_item<tdata>* push_back(const tdata& data)
+	{
+		c2List_item<tdata>* item = new c2List_item<tdata>(data);
+		c2List_item<tdata>* last = end;
+
+		if (last != nullptr)
+		{
+			item->prev = last;
+			last->next = item;
+		}
+		else
+			start = item;
+
+		return item;
+	}
+
 	/**
 	* const access to a node in a position in the list
 	*/
@@ -328,5 +345,11 @@ public:
 			p_other_list = p_other_list->next;
 		}
 	}
+
+	bool empty() const
+	{
+		return start == nullptr;
+	}
 };
+
 #endif /*__c2List_H__*/
