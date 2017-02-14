@@ -42,7 +42,7 @@ bool d1UIManager::Start()
 
 bool d1UIManager::PreUpdate()
 {
-	/*
+	
 	int x_mouse = 0;
 	int y_mouse = 0;
 
@@ -93,7 +93,7 @@ bool d1UIManager::PreUpdate()
 			component->stat = UIComponent_Stat::UNSELECTED;
 	
 	}
-	*/
+	
 	return true;
 	
 }
@@ -102,7 +102,7 @@ bool d1UIManager::PreUpdate()
 // Called after all Updates
 bool d1UIManager::PostUpdate()
 {
-	//drawAllComponents();
+	drawAllComponents();
 	
 	return true;
 }
@@ -119,35 +119,23 @@ UIComponents* d1UIManager::addUIComponent(UIComponent_TYPE type)
 {
 	UIComponents* ret = nullptr;
 
-	/*
+	
 	if (type == UIComponent_TYPE::UIBUTTON)
 	{
-		//components.add(ret = new UIButton(UIComponent_TYPE::UIBUTTON));
-
-		components.push_back(ret = new UIButton(UIComponent_TYPE::UIBUTTON));
+		components.add(ret = new UIButton(UIComponent_TYPE::UIBUTTON));
 	}
 	else if (type == UIComponent_TYPE::UIIMAGE)
 	{
-		//components.add(ret = new UIComponents(UIComponent_TYPE::UIIMAGE));
-
-		components.push_back(ret = new UIComponents(UIComponent_TYPE::UIIMAGE));
+		components.add(ret = new UIComponents(UIComponent_TYPE::UIIMAGE));
 	}
 	else if(type == UIComponent_TYPE::UIINPUT)
 	{
-		//components.add(ret = new UIInput(UIComponent_TYPE::UIINPUT));
-
-		components.push_back(ret = new UIInput(UIComponent_TYPE::UIINPUT));
+		components.add(ret = new UIInput(UIComponent_TYPE::UIINPUT));
 	}
 	else if (type == UIComponent_TYPE::UILABEL)
 	{
-		//components.add(ret = new UILabel(UIComponent_TYPE::UILABEL));
-
-		components.push_back(ret = new UILabel(UIComponent_TYPE::UILABEL));
+		components.add(ret = new UILabel(UIComponent_TYPE::UILABEL));
 	}
-
-	//components.
-	
-	*/
 
 	return ret;
 }
@@ -157,7 +145,7 @@ const SDL_Texture* d1UIManager::GetAtlas() const
 {
 	return atlas;
 }
-/*
+
 const c2List_item<UIComponents*>* d1UIManager::GetFirstComponent() const
 {
 	return components.start;
@@ -201,7 +189,7 @@ void d1UIManager::drawAllComponents()
 		}
 	}
 }
-*/
+
 
 // class uimanager ---------------------------------------------------
 

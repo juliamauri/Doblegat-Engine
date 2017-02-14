@@ -150,17 +150,6 @@ public:
 		return result;
 	}
 
-	uint find(const VALUE& value)
-	{
-		uint i = 0;
-		for (; i < num_elements; ++i)
-		{
-			if (data[i] == value)
-				break;
-		}
-		return i;
-	}
-
 	// Utils
 	unsigned int GetCapacity() const
 	{

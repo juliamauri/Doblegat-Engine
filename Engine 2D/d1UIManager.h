@@ -1,8 +1,6 @@
 #ifndef __d1GUIMANAGER_H__
 #define __d1GUIMANAGER_H__
 
-#include "c2Graph.h"
-
 #include "d1Module.h"
 
 
@@ -135,12 +133,11 @@ public:
 
 	const SDL_Texture* GetAtlas() const;
 
-	//const c2List_item<UIComponents*>* GetFirstComponent() const;
+	const c2List_item<UIComponents*>* GetFirstComponent() const;
 
 private:
-	//c2Graph<UIComponents*> components;
 
-	//c2List<UIComponents*> components;
+	c2List<UIComponents*> components;
 
 	SDL_Texture* atlas;
 	c2SString atlas_file_name;
@@ -148,6 +145,6 @@ private:
 
 
 private:
-	//void drawAllComponents();
+	void drawAllComponents();
 };
 #endif // __d1GUIMANAGER_H__
