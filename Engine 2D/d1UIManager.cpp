@@ -60,8 +60,20 @@ bool d1UIManager::PreUpdate()
 
 			if (App->input->GetMouseButtonDown(LEFT_CLICK) == KEY_DOWN)
 			{
-				if(component->stat == UIComponent_Stat::SELECTED)
+				if (component->stat == UIComponent_Stat::SELECTED)
+				{
 					component->stat = UIComponent_Stat::CLICKL_DOWN;
+
+					//Check or uncheck for UICheckbutton
+					if (component->type == UIComponent_TYPE::UICHECKBUTTON)
+					{
+						UICheckbutton* button_checked = (UICheckbutton*)component;
+						if (button_checked->clicked)
+							button_checked->clicked = false;
+						else
+							button_checked->clicked = true;
+					}
+				}
 				else
 					component->stat = UIComponent_Stat::CLICKL_REPEAT;
 			}
@@ -87,15 +99,11 @@ bool d1UIManager::PreUpdate()
 				else
 					component->stat = UIComponent_Stat::SELECTED;
 			}
-
 		}
 		else
 			component->stat = UIComponent_Stat::UNSELECTED;
-	
 	}
-	
 	return true;
-	
 }
 
 
@@ -135,6 +143,10 @@ UIComponents* d1UIManager::addUIComponent(UIComponent_TYPE type)
 	else if (type == UIComponent_TYPE::UILABEL)
 	{
 		components.add(ret = new UILabel(UIComponent_TYPE::UILABEL));
+	}
+	else if(type == UIComponent_TYPE::UICHECKBUTTON)
+	{
+		components.add(ret = new UICheckbutton(UIComponent_TYPE::UICHECKBUTTON));
 	}
 
 	return ret;
@@ -187,6 +199,15 @@ void d1UIManager::drawAllComponents()
 
 			App->render->Blit(uilabel->text_img, uilabel->rect_position.x - App->render->camera.x, uilabel->rect_position.y - App->render->camera.y);
 		}
+		else if (*type == UIComponent_TYPE::UICHECKBUTTON)
+		{
+			UICheckbutton* uicheckbutton = (UICheckbutton*)item->data;
+
+			if(uicheckbutton->clicked)
+				App->render->Blit(atlas, uicheckbutton->rect_position.x - App->render->camera.x, uicheckbutton->rect_position.y - App->render->camera.y, &uicheckbutton->rect_atlas_clicked);
+			else
+				App->render->Blit(atlas, uicheckbutton->rect_position.x - App->render->camera.x, uicheckbutton->rect_position.y - App->render->camera.y, &uicheckbutton->rect_atlas);
+		}
 	}
 }
 
@@ -237,6 +258,36 @@ void UIButton::Set(const SDL_Rect & position, const SDL_Rect & atlas)
 {
 	rect_position = position;
 	rect_atlas = atlas;
+}
+
+UICheckbutton::UICheckbutton(UIComponent_TYPE type) : UIButton(type) 
+{
+
+}
+
+void UICheckbutton::Set(int pos_x, int pos_y, int pos_w, int pos_h, uint atlas_x, uint atlas_y, uint atlas_w, uint atlas_h, uint atlas_clicked_x, uint atlas_clicked_y, uint atlas_clicked_w, uint atlas_clicked_h)
+{
+	rect_position.x = pos_x;
+	rect_position.y = pos_y;
+	rect_position.w = pos_w;
+	rect_position.h = pos_h;
+
+	rect_atlas.x = atlas_x;
+	rect_atlas.y = atlas_y;
+	rect_atlas.w = atlas_w;
+	rect_atlas.h = atlas_h;
+
+	rect_atlas_clicked.x = atlas_clicked_x;
+	rect_atlas_clicked.y = atlas_clicked_y;
+	rect_atlas_clicked.w = atlas_clicked_w;
+	rect_atlas_clicked.h = atlas_clicked_h;
+}
+
+void UICheckbutton::Set(const SDL_Rect & position, const SDL_Rect & atlas, const SDL_Rect & atlas_clicked)
+{
+	rect_position = position;
+	rect_atlas = atlas;
+	rect_atlas_clicked = atlas_clicked;
 }
 
 UIInput::UIInput(UIComponent_TYPE type) : UIComponents(type)

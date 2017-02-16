@@ -30,7 +30,8 @@ enum UIComponent_TYPE
 	UILABEL,
 	UIBUTTON,
 	UIINPUT,
-	UIIMAGE
+	UIIMAGE,
+	UICHECKBUTTON
 };
 
 class UIComponents
@@ -49,6 +50,7 @@ public:
 	virtual void Set() {};
 };
 
+//Label
 class UILabel : public UIComponents
 {
 public:
@@ -63,11 +65,24 @@ public:
 
 	void ChangeText(const char* text);
 };
+//------
 
+//Image
+class UIImage : public UIComponents
+{
+public:
+	UIImage(UIComponent_TYPE type);
+
+	void Set(int pos_x, int pos_y, int pos_w, int pos_h, uint atlas_x, uint atlas_y, uint atlas_w, uint atlas_h);
+	void Set(const SDL_Rect& position, const SDL_Rect& atlas);
+};
+//------
+
+//Buttons
 class UIButton : public UIComponents
 {
 public:
-	bool clicked;
+	bool clicked = false;
 	UILabel* title;
 
 public:
@@ -77,6 +92,19 @@ public:
 	void Set(const SDL_Rect& position, const SDL_Rect& atlas);
 };
 
+class UICheckbutton : public UIButton
+{
+public:
+	SDL_Rect rect_atlas_clicked;
+
+public:
+	UICheckbutton(UIComponent_TYPE type);
+	void Set(int pos_x, int pos_y, int pos_w, int pos_h, uint atlas_x, uint atlas_y, uint atlas_w, uint atlas_h, uint atlas_clicked_x, uint atlas_clicked_y, uint atlas_clicked_w, uint atlas_clicked_h);
+	void Set(const SDL_Rect& position, const SDL_Rect& atlas, const SDL_Rect & atlas_clicked);
+};
+//------
+
+//Input
 class UIInput : public UIComponents
 {
 public:
@@ -91,15 +119,7 @@ public:
 
 	const char* GetStr();
 };
-
-class UIImage : public UIComponents
-{
-public:
-	UIImage(UIComponent_TYPE type);
-
-	void Set(int pos_x, int pos_y, int pos_w, int pos_h, uint atlas_x, uint atlas_y, uint atlas_w, uint atlas_h);
-	void Set(const SDL_Rect& position, const SDL_Rect& atlas);
-};
+//------
 
 // ---------------------------------------------------
 class d1UIManager : public d1Module
@@ -141,8 +161,6 @@ private:
 
 	SDL_Texture* atlas;
 	c2SString atlas_file_name;
-
-
 
 private:
 	void drawAllComponents();

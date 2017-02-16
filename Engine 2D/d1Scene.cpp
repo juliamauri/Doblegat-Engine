@@ -58,6 +58,10 @@ bool d1Scene::Start()
 	text = (UILabel*)App->uimanager->addUIComponent(UIComponent_TYPE::UILABEL);
 	text->Set(width / 2, height / 4 - 120, "Hello World");
 
+	check_test = (UICheckbutton*)App->uimanager->addUIComponent(UIComponent_TYPE::UICHECKBUTTON);
+	check_test->Set({ 100, 100, 328, 103 }, { 485, 829, 328, 103 }, { 100, 100, 328, 103 });
+	check_test->title->Set(150, 75,"Test Chech Button");
+
 	return true;
 }
 
