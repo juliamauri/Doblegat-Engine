@@ -31,7 +31,8 @@ enum UIComponent_TYPE
 	UIBUTTON,
 	UIINPUT,
 	UIIMAGE,
-	UICHECKBUTTON
+	UICHECKBUTTON,
+	UISELECTOPTION
 };
 
 class UIComponents
@@ -43,6 +44,10 @@ public:
 	UIComponent_TYPE type;
 
 	UIComponent_Stat stat = UIComponent_Stat::UNSELECTED;
+
+	bool draw = true;
+
+	UIComponents* from = nullptr;
 
 public:
 	UIComponents(UIComponent_TYPE type) : type(type) {}
@@ -120,6 +125,31 @@ public:
 	const char* GetStr();
 };
 //------
+
+class UISelectOption : public UIComponents
+{
+public:
+	UILabel* title;
+
+	UILabel* current = nullptr;
+	c2List<UILabel*> options;
+
+	bool selecting = false;
+
+	int num_options = -1;
+
+public:
+	UISelectOption(UIComponent_TYPE type);
+
+	void Set(int pos_x, int pos_y, int pos_w, int pos_h, uint atlas_x, uint atlas_y, uint atlas_w, uint atlas_h);
+	void Set(const SDL_Rect& position, const SDL_Rect& atlas);
+
+	void AddOption(const char* text);
+	const char* CheckSelected();
+	void ChangeCurrent(UILabel* change);
+
+	void ChangeDrawAllOptions();
+};
 
 // ---------------------------------------------------
 class d1UIManager : public d1Module

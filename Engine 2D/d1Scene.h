@@ -7,6 +7,7 @@ struct SDL_Texture;
 class UILabel;
 class UIImage;
 class UICheckbutton;
+class UISelectOption;
 
 class d1Scene : public d1Module
 {
@@ -40,6 +41,7 @@ private:
 	UIImage* banner;
 	UILabel* text;
 	UICheckbutton* check_test;
+	UISelectOption* select_test;
 
 	bool right_click = false;
 	bool left_click = false;

@@ -62,6 +62,14 @@ bool d1Scene::Start()
 	check_test->Set({ 100, 100, 328, 103 }, { 485, 829, 328, 103 }, { 100, 100, 328, 103 });
 	check_test->title->Set(150, 75,"Test Chech Button");
 
+	select_test = (UISelectOption*)App->uimanager->addUIComponent(UIComponent_TYPE::UISELECTOPTION);
+	select_test->Set({ 100,500,100,50 }, { 485, 829, 100, 50 });
+	select_test->title->Set(100, 475, "Select Your Destiny");
+	select_test->AddOption("OMG");
+	select_test->AddOption("YOU'RE FAGGOT");
+	select_test->AddOption("LET ME SUICIDE");
+	select_test->AddOption("FUCK OFF");
+
 	return true;
 }
 
