@@ -13,6 +13,7 @@
 d1UIManager::d1UIManager() : d1Module()
 {
 	name.create("uimanager");
+	//name.assign("uimanager");
 }
 
 // Destructor
@@ -33,7 +34,7 @@ bool d1UIManager::Awake(pugi::xml_node& conf)
 // Called before the first frame
 bool d1UIManager::Start()
 {
-	atlas = App->tex->Load(atlas_file_name.GetString());
+	atlas = App->tex->Load(atlas_file_name.c_str());
 
 	return true;
 }
@@ -48,11 +49,13 @@ bool d1UIManager::PreUpdate()
 
 	App->input->GetMousePosition(x_mouse, y_mouse);
 
-	c2List_item<UIComponents*>* item = components.start;
+	std::list<UIComponents*>::iterator item;
+	item = components.begin();
 
-	for (; item != NULL; item = item->next)
+	while (item != components.end())
 	{
-		UIComponents* component = item->data;
+
+		UIComponents* component = item._Ptr->_Myval;
 
 		if (component->draw)
 		{
@@ -127,6 +130,7 @@ bool d1UIManager::PreUpdate()
 			else
 				component->stat = UIComponent_Stat::UNSELECTED;
 		}
+		item++;
 	}
 	return true;
 }
@@ -151,31 +155,30 @@ bool d1UIManager::CleanUp()
 UIComponents* d1UIManager::addUIComponent(UIComponent_TYPE type)
 {
 	UIComponents* ret = nullptr;
-
 	
 	if (type == UIComponent_TYPE::UIBUTTON)
 	{
-		components.add(ret = new UIButton(UIComponent_TYPE::UIBUTTON));
+		components.push_back(ret = new UIButton(UIComponent_TYPE::UIBUTTON));
 	}
 	else if (type == UIComponent_TYPE::UIIMAGE)
 	{
-		components.add(ret = new UIComponents(UIComponent_TYPE::UIIMAGE));
+		components.push_back(ret = new UIComponents(UIComponent_TYPE::UIIMAGE));
 	}
 	else if(type == UIComponent_TYPE::UIINPUT)
 	{
-		components.add(ret = new UIInput(UIComponent_TYPE::UIINPUT));
+		components.push_back(ret = new UIInput(UIComponent_TYPE::UIINPUT));
 	}
 	else if (type == UIComponent_TYPE::UILABEL)
 	{
-		components.add(ret = new UILabel(UIComponent_TYPE::UILABEL));
+		components.push_back(ret = new UILabel(UIComponent_TYPE::UILABEL));
 	}
 	else if(type == UIComponent_TYPE::UICHECKBUTTON)
 	{
-		components.add(ret = new UICheckbutton(UIComponent_TYPE::UICHECKBUTTON));
+		components.push_back(ret = new UICheckbutton(UIComponent_TYPE::UICHECKBUTTON));
 	}
 	else if (type == UIComponent_TYPE::UISELECTOPTION)
 	{
-		components.add(ret = new UISelectOption(UIComponent_TYPE::UISELECTOPTION));
+		components.push_back(ret = new UISelectOption(UIComponent_TYPE::UISELECTOPTION));
 	}
 	
 	return ret;
@@ -187,52 +190,48 @@ const SDL_Texture* d1UIManager::GetAtlas() const
 	return atlas;
 }
 
-const c2List_item<UIComponents*>* d1UIManager::GetFirstComponent() const
-{
-	return components.start;
-}
-
 void d1UIManager::drawAllComponents()
 {
-	c2List_item<UIComponents*>* item = components.start;
+	std::list<UIComponents*>::iterator item;
+	item = components.begin();
 
 	UIComponent_TYPE* type = nullptr;
 
-	float dt = App->GetDT();
-
-	for (; item != NULL; item = item->next)
+	while (item != components.end())
 	{
-		if (item->data->draw)
+		UIComponents* component = item._Ptr->_Myval;
+		
+		if (component->draw)
 		{
-			type = &item->data->type;
+			type = &component->type;
 
 			if (*type == UIComponent_TYPE::UIBUTTON)
 			{
-				UIComponents* uibutton = item->data;
+				UIComponents* uibutton = component;
 
 				App->render->Blit(atlas, uibutton->rect_position.x - App->render->camera.x, uibutton->rect_position.y - App->render->camera.y, &uibutton->rect_atlas);
 			}
 			else if (*type == UIComponent_TYPE::UIIMAGE)
 			{
-				UIComponents* uiimage = item->data;
+				UIComponents* uiimage = component;
 
 				App->render->Blit(atlas, uiimage->rect_position.x - App->render->camera.x, uiimage->rect_position.y - App->render->camera.y, &uiimage->rect_atlas);
 			}
 			else if (*type == UIComponent_TYPE::UIINPUT)
 			{
-				UIComponents* uiinput = item->data;
+				UIComponents* uiinput = component;
 
 				App->render->Blit(atlas, uiinput->rect_position.x - App->render->camera.x, uiinput->rect_position.y - App->render->camera.y, &uiinput->rect_atlas);
 			}
 			else if (*type == UIComponent_TYPE::UILABEL)
 			{
-				UILabel* uilabel = (UILabel*)item->data;
+				UILabel* uilabel = (UILabel*)component;
 
 				App->render->Blit(uilabel->text_img, uilabel->rect_position.x - App->render->camera.x, uilabel->rect_position.y - App->render->camera.y);
 			}
 			else if (*type == UIComponent_TYPE::UICHECKBUTTON)
 			{
-				UICheckbutton* uicheckbutton = (UICheckbutton*)item->data;
+				UICheckbutton* uicheckbutton = (UICheckbutton*)component;
 
 				if (uicheckbutton->clicked)
 					App->render->Blit(atlas, uicheckbutton->rect_position.x - App->render->camera.x, uicheckbutton->rect_position.y - App->render->camera.y, &uicheckbutton->rect_atlas_clicked);
@@ -241,7 +240,7 @@ void d1UIManager::drawAllComponents()
 			}
 			else if (*type == UIComponent_TYPE::UISELECTOPTION)
 			{
-				UISelectOption* uiselectoption = (UISelectOption*)item->data;
+				UISelectOption* uiselectoption = (UISelectOption*)component;
 
 				App->render->Blit(atlas, uiselectoption->rect_position.x - App->render->camera.x, uiselectoption->rect_position.y - App->render->camera.y, &uiselectoption->rect_atlas);
 
@@ -252,6 +251,7 @@ void d1UIManager::drawAllComponents()
 				}
 			}
 		}
+		item++;
 	}
 }
 
@@ -264,7 +264,7 @@ void UILabel::Set(int pos_x, int pos_y, const char * text, _TTF_Font*  font)
 
 	text_img = App->font->Print(text, { 255,0,0,0 });
 
-	this->text.create(text);
+	this->text.assign(text);
 
 	App->render->GetDimensionsFromTexture(text_img, rect_position.w, rect_position.h);
 }
@@ -277,8 +277,8 @@ void UILabel::ChangeText(const char* text)
 
 		App->render->GetDimensionsFromTexture(text_img, rect_position.w, rect_position.h);
 
-		this->text.Clear();
-		this->text.create(text);
+		this->text.erase();
+		this->text.assign(text);
 	}
 }
 
@@ -423,12 +423,12 @@ void UISelectOption::AddOption(const char * text)
 	if (current == nullptr)
 		ChangeCurrent(newoption);
 	else
-		options.add(newoption);
+		options.push_back(newoption);
 }
 
 const char * UISelectOption::CheckSelected()
 {
-	return current->text.GetString();
+	return current->text.c_str();
 }
 
 void UISelectOption::ChangeCurrent(UILabel * change)
@@ -442,12 +442,20 @@ void UISelectOption::ChangeCurrent(UILabel * change)
 	}
 	else
 	{
-		options.del(options.At(options.find(change)));
+		std::list<UILabel*>::iterator item = options.begin();
+
+		while (item._Ptr->_Myval != change)
+		{
+			item++;
+		}
+
+		options.erase(item);
 		
+
 		SWAP<int>(current->rect_position.x, change->rect_position.x);
 		SWAP<int>(current->rect_position.y, change->rect_position.y);
 
-		options.add(current);
+		options.push_back(current);
 
 
 		current = change;
@@ -457,13 +465,16 @@ void UISelectOption::ChangeCurrent(UILabel * change)
 
 void UISelectOption::ChangeDrawAllOptions()
 {
-	c2List_item<UILabel*>* item = options.start;
+	std::list<UILabel*>::iterator item;
+	item = options.begin();
 
-	for (; item != NULL; item = item->next)
+	while(item != options.end())
 	{
-		if (item->data->draw)
-			item->data->draw = false;
+		if (item._Ptr->_Myval->draw)
+			item._Ptr->_Myval->draw = false;
 		else
-			item->data->draw = true;
+			item._Ptr->_Myval->draw = true;
+
+		item++;
 	}
 }

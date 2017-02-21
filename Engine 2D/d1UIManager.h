@@ -3,6 +3,7 @@
 
 #include "d1Module.h"
 
+#include <list>
 
 struct _TTF_Font;
 
@@ -59,7 +60,7 @@ public:
 class UILabel : public UIComponents
 {
 public:
-	c2SString text;
+	std::string text;
 	SDL_Texture* text_img;
 	_TTF_Font*  font;
 
@@ -113,7 +114,7 @@ public:
 class UIInput : public UIComponents
 {
 public:
-	c2SString input_text;
+	std::string input_text;
 	UILabel* title;
 
 public:
@@ -132,7 +133,7 @@ public:
 	UILabel* title;
 
 	UILabel* current = nullptr;
-	c2List<UILabel*> options;
+	std::list<UILabel*> options;
 
 	bool selecting = false;
 
@@ -183,14 +184,12 @@ public:
 
 	const SDL_Texture* GetAtlas() const;
 
-	const c2List_item<UIComponents*>* GetFirstComponent() const;
-
 private:
 
-	c2List<UIComponents*> components;
+	std::list<UIComponents*> components;
 
 	SDL_Texture* atlas;
-	c2SString atlas_file_name;
+	std::string atlas_file_name;
 
 private:
 	void drawAllComponents();
