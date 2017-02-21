@@ -85,7 +85,7 @@ bool d1UIManager::PreUpdate()
 						}
 
 						//Selecting option from UISelectOption
-						if (component->type == UIComponent_TYPE::UILABEL && component->from->type == UIComponent_TYPE::UISELECTOPTION)
+						if (component->type == UIComponent_TYPE::UILABEL && (component->from != nullptr && component->from->type == UIComponent_TYPE::UISELECTOPTION))
 						{
 							UISelectOption* from_option_selected = (UISelectOption*)component->from;
 							UILabel* option_selected = (UILabel*)component;
